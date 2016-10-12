@@ -1,36 +1,24 @@
-import logging
+import tornado.ioloop, tornado.web, motor.motor_tornado, api
 
-log = logging.logger
+rec = api.receiver() #setup mongod interface here
 
-def fingerprint(request):
-    
+class api_submit_data(tornado.web.RequestHandler):
+	def get(self):
+		rec.add_data(self)
 
-class receiver()
-    def __init__(self):
-        self.__fxnList = {}
-        self.__maxscores = {}
-        self.__scores = {}
-        self.__username = ''
-        
-    def add(self, name, fxn, score):
-        self.__fxnList[name] = fxn
-        self.__maxscores[name] = score
-        self.__scores[name] = -1
-        
-    def run(self, request)
-        name = request.get_argument('name')
-        try:
-            self.__scores[name] = self.__fxnList[name](request, self.__username)
-            return (0)
-        except IndexError:
-            log.debug('Client input error: Could not find handler with name of ' +name + '.  ')
-            return(1)
+class api_get_trust(tornado.web.RequestHandler):
+	def get(self):
+		self.write(rec.run(self.get_argument('sessionID'),
+			self.get_argument('userID')))
 
-    def gTrust(self):
-        total = 0
-        actmax = 0
-        for i in fxnList.keyes():
-            if self.__scores[i] > -1:
-                actmax += self.__maxscores[i]
-                total += self.__scores[i]
-        return(total/actmax)
+def make_app():
+	return(tornado.web.Application([
+		(r"/api/sub_dat", api_submit_data),
+		(r"/api/get_trust", api_get_trust),
+
+	]))
+
+if __name__ == '__main__':
+	app = make_app()
+	app.listen(8080)
+	tornado.ioloop.IOLoop.current().start()
