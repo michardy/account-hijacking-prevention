@@ -1,15 +1,18 @@
 # This script is the main script
 # It responds to HTTP requests and connects to the server
 
-import tornado.ioloop, tornado.web, motor.motor_tornado, api
+import tornado.ioloop
+import tornado.web
+import motor.motor_tornado
+import api
 
 rec = api.receiver()
 
-class api_submit_data(tornado.web.RequestHandler):
+class apiSubmitData(tornado.web.RequestHandler):
 	def get(self):
-		rec.add_data(self)
+		rec.addData(self)
 
-class api_get_trust(tornado.web.RequestHandler):
+class apiGetTrust(tornado.web.RequestHandler):
 	def get(self):
 		db = self.settings['db']
 		self.write(rec.gTrust(self.get_argument('sessionID'),
@@ -17,14 +20,14 @@ class api_get_trust(tornado.web.RequestHandler):
 
 db = motor.motor_tornado.MotorClient().hijackingPrevention
 
-def make_app():
+def makeApp():
 	return(tornado.web.Application([
-		(r"/api/sub_dat", api_submit_data),
-		(r"/api/get_trust", api_get_trust),
+		(r"/api/sub_dat", apiSubmitData),
+		(r"/api/get_trust", apiGetTrust),
 		(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static/'})
 	], db=db))
 
 if __name__ == '__main__':
-	app = make_app()
+	app = makeApp()
 	app.listen(8080)
 	tornado.ioloop.IOLoop.current().start()

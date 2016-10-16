@@ -9,17 +9,17 @@ class receiver():
 		self.__comparers = {}
 		self.__maxscores = {}
 
-	def add_hasher(self, name, fxn): #called on by any data hashing module on startup
+	def addHasher(self, name, fxn): #called on by any data hashing module on startup
 		#registers a function to hash a type of data
 		self.__hashers[name] = fxn
 
-	def add_comparer(self, name, fxn, score): #called by any data collecting module on startup
+	def addComparer(self, name, fxn, score): #called by any data collecting module on startup
 		#registers a function to compare hashes of a type of data
 		self.__comparers = {}
 		self.__maxscores[name] = score
 		self.__scores[name] = -1
 
-	def add_data(self, req): #called when data is received
+	def addData(self, req): #called when data is received
 		#TODO: move this fxn out of this class?
 		if req.get_argument('name') in self.__comparers.keys():
 			request.write('OK')
