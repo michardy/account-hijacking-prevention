@@ -1,14 +1,15 @@
+# This script compares user data
+# it is also called to intialize modules that hash and compare data
+
 import logging
 
-#log = logging.logger
-
 class receiver():
-	def __init__(self):#initialize db connection
+	def __init__(self):
 		self.__hashers = {}
 		self.__comparers = {}
 		self.__maxscores = {}
 
-	def add_hasher(self, name, fxn): #called on by any data collecting module on startup
+	def add_hasher(self, name, fxn): #called on by any data hashing module on startup
 		#registers a function to hash a type of data
 		self.__hashers[name] = fxn
 
@@ -31,20 +32,10 @@ class receiver():
 			req.write('Err: Could not find a handler for "' + req.get_argument('name') + '"')
 			req.set_status(400)
 
-'''	def run(self, request):
-		name = request.get_argument('name')
-		try:
-			scores[name] = self.__fxnList[name](request, self.__username)
-			return (0)
-		except IndexError:
-			print('Client input error: Could not find handler with name of ' + name + '.  ')
-			return(1)
-'''
-
-	def gTrust(self):
+	def gTrust(self, SID, UID, db):
 		total = 0
 		actmax = 0
-		for i in fxnList.keyes():
+		for i in self.__comparers.keys():
 			if self.__scores[i] > -1:
 				actmax += self.__maxscores[i]
 				total += self.__scores[i]
