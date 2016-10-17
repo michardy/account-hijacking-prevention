@@ -2,6 +2,7 @@
 # it is also called to intialize modules that hash and compare data
 
 import logging
+import mongo_int
 
 class receiver():
 	def __init__(self):
@@ -23,11 +24,10 @@ class receiver():
 		#TODO: move this fxn out of this class?
 		if req.get_argument('name') in self.__comparers.keys():
 			request.write('OK')
-			'''
 			hash = self.hashers[req.get_getargument('name')](req.get_argument('data'))
-			save(req.get_argument('sessionID'),
-				req.get_argument('name'), hash)
-			'''
+			site = mongo_int.getSiteByClientKey(ref.get_argument('ck')), db)
+			mongo_int.addToSession(hash, req.get_argument('name'),
+				req.get_argument('sessionID'), site, db)
 		else:
 			req.write('Err: Could not find a handler for "' + req.get_argument('name') + '"')
 			req.set_status(400)
