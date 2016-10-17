@@ -25,7 +25,7 @@ class receiver():
 		if req.get_argument('name') in self.__comparers.keys():
 			request.write('OK')
 			hash = self.hashers[req.get_getargument('name')](req.get_argument('data'))
-			site = mongo_int.getSiteByClientKey(ref.get_argument('ck')), db)
+			site = mongo_int.getSiteByClientKey(ref.get_argument('ck'), db)
 			mongo_int.addToSession(hash, req.get_argument('name'),
 				req.get_argument('sessionID'), site, db)
 		else:
