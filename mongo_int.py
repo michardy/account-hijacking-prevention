@@ -28,3 +28,12 @@ def addToSession(data, type, session, site, db):
 		ssd.update({'sessionID':session}, {'data':dataObj})
 	else:
 		ssd.insert({'sessionID':session, 'data':dataObj})
+
+def sessionToUser(SID, UID, site):
+	ssd = db['sessionData_site-' + site]
+	sud = db['userData_site-' + site]
+	result = ssd.find_one({'sessionID':session})
+	if result:
+		result.pop('sessionID', None)
+		result['userID'] = UID
+		sud.insert(result)
