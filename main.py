@@ -5,8 +5,7 @@ import tornado.ioloop
 import tornado.web
 import motor.motor_tornado
 import api
-
-rec = api.receiver()
+import modules
 
 class apiSubmitData(tornado.web.RequestHandler):
 	def get(self):
