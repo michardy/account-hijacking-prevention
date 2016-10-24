@@ -4,12 +4,14 @@
 import tornado.ioloop
 import tornado.web
 import motor.motor_tornado
-import api
+#import api
+import rec
 import modules
 
 class apiSubmitData(tornado.web.RequestHandler):
 	def get(self):
-		rec.addData(self)
+		db = self.settings['db']
+		rec.rec.addData(self, db)
 
 class apiGetTrust(tornado.web.RequestHandler):
 	def get(self):

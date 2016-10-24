@@ -4,6 +4,9 @@
 import logging
 import mongo_int
 
+import tornado.ioloop
+from tornado import gen
+
 class receiver():
 	def __init__(self):
 		self.__hashers = {}
@@ -16,17 +19,17 @@ class receiver():
 
 	def addComparer(self, name, fxn, score): #called by any data collecting module on startup
 		#registers a function to compare hashes of a type of data
-		self.__comparers = {}
+		self.__comparers[name] = fxn
 		self.__maxscores[name] = score
-		self.__scores[name] = -1
 
-	def addData(self, req): #called when data is received
+	@gen.coroutine
+	def addData(self, req, db): #called when data is received
 		#TODO: move this fxn out of this class?
 		if req.get_argument('name') in self.__comparers.keys():
-			request.write('OK')
-			hash = self.hashers[req.get_getargument('name')](req.get_argument('data'))
-			site = mongo_int.getSiteByClientKey(ref.get_argument('ck'), db)
-			mongo_int.addToSession(hash, req.get_argument('name'),
+			req.write('OK')
+			hash = self.__hashers[req.get_argument('name')](req.get_argument('data'))
+			site = yield mongo_int.getSiteByClientKey(req.get_argument('ck'), 'test', db)
+			yield mongo_int.addToSession(hash, req.get_argument('name'),
 				req.get_argument('sessionID'), site, db)
 		else:
 			req.write('Err: Could not find a handler for "' + req.get_argument('name') + '"')
