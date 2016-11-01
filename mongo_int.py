@@ -8,9 +8,10 @@ def getSiteByClientKey(key, ref, db):
 	site = yield sl.find_one({'clientKey':key})
 	return(str(site['_id']))
 
+@gen.coroutine
 def getSiteByServerKey(key, ref, db):
 	sl = db['siteList']
-	site = sl.find_one({'serverKey':key})
+	site = yield sl.find_one({'serverKey':key})
 	return(site['_id'])
 
 def session_update(session, data, type):
@@ -19,6 +20,15 @@ def session_update(session, data, type):
 	tDelta = datetime.timedelta(hours=60)
 	session[type]['expireTime'] = curTime + tDelta #set the data to expire in an hour
 	return(session)
+
+@gen.coroutine
+def getSalt(key, ref, db, type):
+	sl = db['siteList']
+	print(key)
+	print(sl)
+	site = yield sl.find_one({'clientKey':key})
+	print(site)
+	return(site['salts'][type])
 
 @gen.coroutine
 def addToSession(data, type, session, site, db):
