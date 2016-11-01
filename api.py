@@ -25,12 +25,12 @@ class receiver():
 	@gen.coroutine
 	def addData(self, req, db): #called when data is received
 		#TODO: move this fxn out of this class?
-		if req.get_argument('name') in self.__comparers.keys():
-			req.write('OK')
-			hash = self.__hashers[req.get_argument('name')](req.get_argument('data'))
-			site = yield mongo_int.getSiteByClientKey(req.get_argument('ck'), 'test', db)
-			yield mongo_int.addToSession(hash, req.get_argument('name'),
-				req.get_argument('sessionID'), site, db)
+		if req['name'] in self.__comparers.keys():
+			#req.write('OK')
+			hash = self.__hashers[req['name']](req['data'], req['ck'], 'test', db)
+			site = yield mongo_int.getSiteByClientKey(req['ck'], 'test', db)
+			yield mongo_int.addToSession(hash, req['name'],
+				req['sessionID'], site, db)
 		else:
 			req.write('Err: Could not find a handler for "' + req.get_argument('name') + '"')
 			req.set_status(400)

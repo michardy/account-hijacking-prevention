@@ -4,14 +4,16 @@
 import tornado.ioloop
 import tornado.web
 import motor.motor_tornado
-#import api
+import json
 import rec
 import modules
+import client
 
 class apiSubmitData(tornado.web.RequestHandler):
-	def get(self):
+	def post(self):#TODO: use request.body and json
+		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		rec.rec.addData(self, db)
+		rec.rec.addData(payload, db)
 
 class apiGetTrust(tornado.web.RequestHandler):
 	def get(self):
@@ -19,14 +21,21 @@ class apiGetTrust(tornado.web.RequestHandler):
 		self.write(rec.gTrust(self.get_argument('sessionID'),
 			self.get_argument('userID'), db))
 
+class collect(tornado.web.RequestHandler):
+	def get(self):
+		self.set_header("Content-Type", 'application/javascript; charset="utf-8"')
+		self.render('collect.js', collectors=rec.mods.fxns,
+			colList = json.dumps(rec.mods.fxnNames))
+
 db = motor.motor_tornado.MotorClient().hijackingPrevention
 
 def makeApp():
 	return(tornado.web.Application([
 		(r"/api/sub_dat", apiSubmitData),
 		(r"/api/get_trust", apiGetTrust),
-		(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static/'})
-	], db=db))
+		(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static/'}),
+		(r"/dynamic/collect.js", collect)
+	], db=db, template_path='templates/'))
 
 if __name__ == '__main__':
 	app = makeApp()
