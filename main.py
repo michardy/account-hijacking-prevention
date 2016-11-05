@@ -13,12 +13,14 @@ class apiSubmitData(tornado.web.RequestHandler):
 	def post(self):#TODO: use request.body and json
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		rec.rec.addData(payload, db)
+		out = rec.rec.addData(payload, db)
+		self.set_status(out[0])
+		self.write(out[1])
 
 class apiGetTrust(tornado.web.RequestHandler):
 	def get(self):
 		db = self.settings['db']
-		self.write(rec.gTrust(self.get_argument('sessionID'),
+		self.write(rec.rec.gTrust(self.get_argument('sessionID'),
 			self.get_argument('userID'), db))
 
 class collect(tornado.web.RequestHandler):

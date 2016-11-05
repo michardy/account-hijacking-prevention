@@ -25,14 +25,13 @@ class receiver():
 	def addData(self, req, db): #called when data is received
 		#TODO: move this fxn out of this class?
 		if req['name'] in self.__comparers.keys():
-			#req.write('OK')
 			hash = yield self.__hashers[req['name']](req['data'], req['ck'], 'test', db)
 			site = yield mongo_int.getSiteByClientKey(req['ck'], 'test', db)
 			yield mongo_int.addToSession(hash, req['name'],
 				req['sessionID'], site, db)
+			return(200, 'OK')
 		else:
-			req.write('Err: Could not find a handler for "' + req.get_argument('name') + '"')
-			req.set_status(400)
+			return(400, 'Err: Could not find a handler for "' + req.get_argument('name') + '"')
 
 	def gTrust(self, SID, UID, db):
 		total = 0
