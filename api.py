@@ -1,7 +1,6 @@
 # This script compares user data
 # it is also called to intialize modules that hash and compare data
 
-import logging
 import mongo_int
 
 import tornado.ioloop
