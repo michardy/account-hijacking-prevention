@@ -24,27 +24,21 @@ def session_update(session, data, type):
 @gen.coroutine
 def getSalt(key, ref, db, type):
 	sl = db['siteList']
-	print(key)
-	print(sl)
 	site = yield sl.find_one({'clientKey':key})
-	print(site)
 	return(site['salts'][type])
 
 @gen.coroutine
 def addToSession(data, type, session, site, db):
 	ssd = db['sessionData_site-' + site]
-	result = yield ssd.find_one({'sessionId':session})
+	result = yield ssd.find_one({'sessionID':session})
 	if result:
-		dataObj = result
+		dataObj = result['data']
 	else:
 		dataObj = {}
 	dataObj[type] = {}
 	dataObj[type]['data'] = data
 	dataObj = session_update(dataObj, data, type)
-	if result:
-		ssd.update({'sessionID':session}, {'data':dataObj})
-	else:
-		ssd.insert({'sessionID':session, 'data':dataObj})
+	ssd.find_one_and_replace({'sessionID':session}, {'sessionID':session, 'data':dataObj}, upsert=True)
 
 def sessionToUser(SID, UID, site):
 	ssd = db['sessionData_site-' + site]
