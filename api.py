@@ -27,7 +27,7 @@ class receiver():
 		#TODO: move this fxn out of this class?
 		if req['name'] in self.__comparers.keys():
 			#req.write('OK')
-			hash = self.__hashers[req['name']](req['data'], req['ck'], 'test', db)
+			hash = yield self.__hashers[req['name']](req['data'], req['ck'], 'test', db)
 			site = yield mongo_int.getSiteByClientKey(req['ck'], 'test', db)
 			yield mongo_int.addToSession(hash, req['name'],
 				req['sessionID'], site, db)
