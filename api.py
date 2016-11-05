@@ -9,12 +9,16 @@ from tornado import gen
 class receiver():
 	def __init__(self):
 		self.__hashers = {}
+		self.__translators = {}
 		self.__comparers = {}
 		self.__maxscores = {}
 
 	def addHasher(self, name, fxn): #called on by any data hashing module on startup
 		#registers a function to hash a type of data
 		self.__hashers[name] = fxn
+
+	def addTranslator(self, name, fxn):
+		self.__translators[name] = fxn
 
 	def addComparer(self, name, fxn, score): #called by any data collecting module on startup
 		#registers a function to compare hashes of a type of data
@@ -32,6 +36,18 @@ class receiver():
 			return(200, 'OK')
 		else:
 			return(400, 'Err: Could not find a handler for "' + req.get_argument('name') + '"')
+
+	@gen.coroutine
+	def copyData(self, req, db):
+		sid = red['sid']
+		uid = req['uid']
+		session = yield mongo_int.getSession(sid)
+		user = {'data':{}}
+		for dt in session.keyes():
+			user['data'][dt] = self.__translators[dt](session[dt])
+		mongo_int.write_user(uid, user)
+		return(200, 'OK')
+
 
 	def gTrust(self, SID, UID, db):
 		total = 0

@@ -40,6 +40,17 @@ def addToSession(data, type, session, site, db):
 	dataObj = session_update(dataObj, data, type)
 	ssd.find_one_and_replace({'sessionID':session}, {'sessionID':session, 'data':dataObj}, upsert=True)
 
+@gen.coroutine
+def getSession(sid, site):
+	ssd = db['sessionData_site-' + site]
+	return(yield ssd.find_one({'sessionID':session})['data'])
+
+@gen.coroutine
+def writeUser(uid, data, site):
+	ssd = db['sessionData_site-' + site]
+	#check if the user already exists
+	#if so merge their data
+
 def sessionToUser(SID, UID, site):
 	ssd = db['sessionData_site-' + site]
 	sud = db['userData_site-' + site]
