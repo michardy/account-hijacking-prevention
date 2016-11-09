@@ -41,13 +41,32 @@ def addToSession(data, type, session, site, db):
 	ssd.find_one_and_replace({'sessionID':session}, {'sessionID':session, 'data':dataObj}, upsert=True)
 
 @gen.coroutine
-def getSession(sid, site):
-	ssd = db['sessionData_site-' + site]
-	return(yield ssd.find_one({'sessionID':session})['data'])
+def getSession(sid, site, db):
+	ssd = db['sessionData_site-' + str(site)]
+	return((yield ssd.find_one({'sessionID':sid}))['data'])
 
 @gen.coroutine
-def writeUser(uid, data, site):
-	ssd = db['sessionData_site-' + site]
+def getUserDat(uid, site, db):
+	sud = db['userData_site-' + str(site)]
+	return((yield ssd.find_one({'userID':uid}))['data'])
+
+@gen.coroutine
+def writeUser(uid, data, site, db):
+	sud = db['userData_site-' + str(site)]
+	try:
+		res = sud.findOne({'uid':uid})
+	except TypeError:
+		res = False
+	if not res:
+		res = {'uid':uid, 'data':{}}
+	print(data)
+	print(res)
+	for k in data['data'].keys():
+		if k in res['data'].keys():
+			res['data'][k].append(data['data'][k])
+		else:
+			res['data'][k] = [data['data'][k]]
+	sud.find_one_and_replace({'uid':uid}, res, upsert=True)
 	#check if the user already exists
 	#if so merge their data
 

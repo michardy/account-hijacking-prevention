@@ -20,6 +20,12 @@ def comparer(SID, UID, site):
 
 rec.rec.addComparer('ip', comparer, 1)
 
+def translator(data):
+	salt = bcrypt.gensalt()
+	return(bcrypt.hashpw(data['data'].encode('utf-8'), salt))
+
+rec.rec.addTranslator('ip', translator)
+
 fxn = '''
 function ip(){
 	return(['ip', 'ip']);

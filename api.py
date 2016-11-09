@@ -39,13 +39,16 @@ class receiver():
 
 	@gen.coroutine
 	def copyData(self, req, db):
-		sid = red['sid']
+		sid = req['sid']
 		uid = req['uid']
-		session = yield mongo_int.getSession(sid)
-		user = {'data':{}}
-		for dt in session.keyes():
+		site = yield mongo_int.getSiteByServerKey(req['ak'], 'test', db)
+		session = yield mongo_int.getSession(sid, site, db)
+		print(session)
+		user = {'sessionID': sid, 'data':{}}
+		for dt in session.keys():
 			user['data'][dt] = self.__translators[dt](session[dt])
-		mongo_int.write_user(uid, user)
+		print(user)
+		mongo_int.writeUser(uid, user, site, db)
 		return(200, 'OK')
 
 
