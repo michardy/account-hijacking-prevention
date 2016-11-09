@@ -8,26 +8,30 @@ import json
 import rec #rename modules
 import modules #rename config
 import client
+from tornado import gen
 
 class apiSubmitData(tornado.web.RequestHandler):
+	@gen.coroutine
 	def post(self):#TODO: use request.body and json
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		out = rec.rec.addData(payload, db)
+		out = yield rec.rec.addData(payload, db)
 		self.set_status(out[0])
 		self.write(out[1])
 
 class apiGetTrust(tornado.web.RequestHandler):
+	@gen.coroutine
 	def get(self):
 		db = self.settings['db']
-		self.write(rec.rec.gTrust(self.get_argument('sessionID'),
-			self.get_argument('userID'), db))
+		self.write((yield rec.rec.gTrust(self.get_argument('sessionID'),
+			self.get_argument('userID'), db)))
 
 class apiRegisterUser(tornado.web.RequestHandler):
+	@gen.coroutine
 	def post(self):
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		out = rec.rec.copyData(payload)
+		out = yield rec.rec.copyData(payload, db)
 		self.set_status(out[0])
 		self.write(out[1])
 
