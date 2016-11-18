@@ -9,7 +9,7 @@ def getSiteByClientKey(key, ref, db):
 	return(str(site['_id']))
 
 @gen.coroutine
-def getSiteByServerKey(key, ref, db):
+def getSiteByServerKey(key, db):
 	sl = db['siteList']
 	site = yield sl.find_one({'serverKey':key})
 	return(site['_id'])
@@ -48,7 +48,7 @@ def getSession(sid, site, db):
 @gen.coroutine
 def getUserDat(uid, site, db):
 	sud = db['userData_site-' + str(site)]
-	return((yield ssd.find_one({'userID':uid}))['data'])
+	return((yield sud.find_one({'uid':uid}))['data'])
 
 @gen.coroutine
 def writeUser(uid, data, site, db):
