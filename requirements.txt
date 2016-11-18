@@ -1,0 +1,8 @@
+bcrypt==3.1.1
+cffi==1.8.3
+greenlet==0.4.10
+motor==1.0
+pycparser==2.14
+pymongo==3.3.1
+six==1.10.0
+tornado==4.4.2
