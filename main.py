@@ -8,6 +8,7 @@ import json
 import rec #rename modules
 import modules #rename config
 import client
+import mongo_int
 from tornado import gen
 
 class apiSubmitData(tornado.web.RequestHandler):
@@ -21,10 +22,12 @@ class apiSubmitData(tornado.web.RequestHandler):
 
 class apiGetTrust(tornado.web.RequestHandler):
 	@gen.coroutine
-	def get(self):
+	def post(self):
 		db = self.settings['db']
-		self.write((yield rec.rec.gTrust(self.get_argument('sessionID'),
-			self.get_argument('userID'), db)))
+		payload = json.loads(self.request.body.decode('utf-8'))
+		site = yield mongo_int.getSiteByServerKey(payload['ak'], db)
+		self.write((yield rec.rec.gTrust(payload['sessionID'],
+			payload['userID'], site, db)))
 
 class apiRegisterUser(tornado.web.RequestHandler):
 	@gen.coroutine

@@ -51,12 +51,12 @@ class receiver():
 		mongo_int.writeUser(uid, user, site, db)
 		return(200, 'OK')
 
-
-	def gTrust(self, SID, UID, db):
+	@gen.coroutine
+	def gTrust(self, sid, uid, site, db):
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():
-			if self.__scores[i] > -1:
-				actmax += self.__maxscores[i]
-				total += self.__scores[i]
-		return(total/actmax)
+			actmax += self.__maxscores[i]
+			total += yield self.__comparers[i](sid, uid, site, db)
+		print(total/actmax)
+		return(str(total/actmax))
