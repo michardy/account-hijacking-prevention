@@ -29,7 +29,7 @@ class apiGetTrust(tornado.web.RequestHandler):
 		db = self.settings['db']
 		payload = json.loads(self.request.body.decode('utf-8'))
 		site = yield mongo_int.getSiteByServerKey(payload['ak'], db)
-		self.write((yield rec.rec.gTrust(payload['sessionID'],
+		self.write((yield rec.rec.gTrust(payload['sid'],
 			payload['userID'], site, db)))
 
 class apiRegisterUser(tornado.web.RequestHandler):
