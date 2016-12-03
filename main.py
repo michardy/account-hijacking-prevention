@@ -14,6 +14,9 @@ from tornado import gen
 class apiSubmitData(tornado.web.RequestHandler):
 	@gen.coroutine
 	def post(self):#TODO: use request.body and json
+		self.set_header("Access-Control-Allow-Origin", "*")
+		self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+		self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
 		out = yield rec.rec.addData(payload, db)
