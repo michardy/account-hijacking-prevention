@@ -6,7 +6,7 @@ import tornado.web
 import motor.motor_tornado
 import json
 import rec #rename modules
-import modules #rename config
+import config
 import client
 import mongo_int
 from tornado import gen

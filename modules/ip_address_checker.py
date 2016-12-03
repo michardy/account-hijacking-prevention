@@ -15,9 +15,6 @@ rec.rec.addHasher('ip', hasher)
 def comparer(sid, uid, site, db):
 	session = yield mongo_int.getSession(sid, site, db)
 	user = yield mongo_int.getUserDat(uid, site, db)
-	print(session)
-	print(user)
-	print(bcrypt.hashpw(session['ip']['data'].encode('utf-8'), user['ip'][0]))
 	return(bcrypt.hashpw(session['ip']['data'].encode('utf-8'), user['ip'][0]) == user['ip'][0])
 
 rec.rec.addComparer('ip', comparer, 1)
