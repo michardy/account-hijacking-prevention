@@ -41,11 +41,36 @@ class apiRegisterUser(tornado.web.RequestHandler):
 		self.set_status(out[0])
 		self.write(out[1])
 
+class apiValUsr(tornado.web.RequestHandler):
+	def post(self):
+		db = self.settings['db']
+		payload = json.loads(self.request.body.decode('utf-8'))
+		#email.confirm(payload['email'], code)
+		#mongo_int.storeUserValCode(code, payload['uid'],
+		#	payload['ak'], db)
+		return('OK')
+
+class apiValCode(tornado.web.RequestHandler):
+	def post(self):
+		db = self.settings['db']
+		site = yield mongo_int.getSiteByClientKey(self.get_argument('ck'))
+		uid = self.get_argument('uid')
+		sid = self.get_argument('sid')
+		#code = yield mongo_int.getUserValCode(uid, site)
+		if code == self.get_argument('code'):
+			pass
+			#yield rec.rec.copyData({'sid':sid, 'uid':uid}, db)
+
 class collect(tornado.web.RequestHandler):
 	def get(self):
 		self.set_header("Content-Type", 'application/javascript; charset="utf-8"')
 		self.render('collect.js', collectors=rec.mods.fxns,
 			colList = json.dumps(rec.mods.fxnNames))
+
+class askUser(tornado.web.RequestHandler):
+	def get(self):
+		self.render('verify.html', sid=self.get_argument('sid'),
+			ck=self.get_argument('ck'))
 
 db = motor.motor_tornado.MotorClient().hijackingPrevention
 
@@ -54,8 +79,11 @@ def makeApp():
 		(r"/api/sub_dat", apiSubmitData),
 		(r"/api/get_trust", apiGetTrust),
 		(r"/api/reg_usr", apiRegisterUser),
+		(r"/api/val_usr", apiValUsr),
+		(r"/api/val_code", apiValCode),
 		(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static/'}),
-		(r"/dynamic/collect.js", collect)
+		(r"/dynamic/collect.js", collect),
+		(r"/dynamic/ask_usr", askUser)
 	], db=db, template_path='templates/'))
 
 if __name__ == '__main__':
