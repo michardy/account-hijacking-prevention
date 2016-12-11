@@ -10,6 +10,7 @@ import rec #rename modules
 import config
 import client
 import mongo_int
+import verify
 from tornado import gen
 
 class apiSubmitData(tornado.web.RequestHandler):
