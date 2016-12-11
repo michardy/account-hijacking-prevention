@@ -1,2 +1,2 @@
-import modules.ip_adress_checker
+import modules.ip_address_checker
 import modules.fingerprint
