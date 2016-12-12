@@ -1,5 +1,6 @@
 #! /bin/bash
 
+sudo apt-get update
 sudo apt-get install python-virtualenv
 sudo apt-get install mongodb
 virtualenv venv

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Verify</title>
+	</head>
+	<body>
+		<main>
+			<p>An authentication code has been sent to your email.  Type it into the form below to confirm your identity.  </p>
+			<form action="/api/val_code" method="POST">
+				<input type="hidden" name="sid" value="{{ sid }}"></input>
+				<input type="hidden" name="ck" value="{{ ck }}"></input>
+				Authentication code:<input type="test" name="ac"></input>
+				<button type="submit">Submit</button>
+			<form>
+		</main>
+	</body>
+</html>
