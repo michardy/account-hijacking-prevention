@@ -1,3 +1,4 @@
+#! venv/bin/python
 # This script is the main script
 # It responds to HTTP requests and connects to the server
 
@@ -13,7 +14,10 @@ from tornado import gen
 
 class apiSubmitData(tornado.web.RequestHandler):
 	@gen.coroutine
-	def post(self):#TODO: use request.body and json
+	def post(self):
+		self.set_header("Access-Control-Allow-Origin", "*")
+		self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+		self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
 		out = yield rec.rec.addData(payload, db)
@@ -26,8 +30,8 @@ class apiGetTrust(tornado.web.RequestHandler):
 		db = self.settings['db']
 		payload = json.loads(self.request.body.decode('utf-8'))
 		site = yield mongo_int.getSiteByServerKey(payload['ak'], db)
-		self.write((yield rec.rec.gTrust(payload['sessionID'],
-			payload['userID'], site, db)))
+		self.write((yield rec.rec.gTrust(payload['sid'],
+			payload['uid'], site, db)))
 
 class apiRegisterUser(tornado.web.RequestHandler):
 	@gen.coroutine
@@ -44,6 +48,10 @@ class collect(tornado.web.RequestHandler):
 		self.render('collect.js', collectors=rec.mods.fxns,
 			colList = json.dumps(rec.mods.fxnNames))
 
+class testpage(tornado.web.RequestHandler):
+	def get(self):
+		self.render('index.html')
+
 db = motor.motor_tornado.MotorClient().hijackingPrevention
 
 def makeApp():
@@ -52,7 +60,8 @@ def makeApp():
 		(r"/api/get_trust", apiGetTrust),
 		(r"/api/reg_usr", apiRegisterUser),
 		(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static/'}),
-		(r"/dynamic/collect.js", collect)
+		(r"/dynamic/collect.js", collect),
+		(r"/", testpage)
 	], db=db, template_path='templates/'))
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ class receiver():
 	def copyData(self, req, db):
 		sid = req['sid']
 		uid = req['uid']
-		site = yield mongo_int.getSiteByServerKey(req['ak'], 'test', db)
+		site = yield mongo_int.getSiteByServerKey(req['ak'], db)
 		session = yield mongo_int.getSession(sid, site, db)
 		print(session)
 		user = {'sessionID': sid, 'data':{}}

@@ -1,0 +1,932 @@
+Traceback (most recent call last):
+  File "./main.py", line 70, in <module>
+    tornado.ioloop.IOLoop.current().start()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/ioloop.py", line 862, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.37ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '652b527c-81fd-e7e4-05ac-158aaf530b3c', 'Accept': '*/*', 'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Accept-Language': 'en-US,en;q=0.8', 'Host': 'localhost:8080', 'Content-Length': '61', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 7.28ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '70d56017-657f-d42d-5a8a-f4e8912ffc5a', 'Accept': '*/*', 'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Accept-Language': 'en-US,en;q=0.8', 'Host': 'localhost:8080', 'Content-Length': '61', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.96ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '97d25640-feae-d4be-7cbb-04e68006a8cb', 'Accept': '*/*', 'Origin': 'chrome-extension://aicmkgpgakddgnaphhhpliifpcfhicfo', 'Accept-Language': 'en-US,en;q=0.8', 'Host': 'localhost:8080', 'Content-Length': '61', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.90ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '4c20353d-755f-b659-d431-3b9c74c1a40e', 'Host': 'localhost:8080', 'Content-Length': '9', 'Accept': '*/*', 'Content-Type': 'application/json', 'User-Agent': 'curl/7.51.0', 'Connection': 'close', 'Cache-Control': 'no-cache'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "./main.py", line 39, in post
+    payload = json.loads(self.request.body.decode('utf-8'))
+  File "/usr/lib/python3.5/json/__init__.py", line 319, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.5/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.5/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 2.58ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '3a995457-be99-da9b-2805-93179bee7569', 'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "./main.py", line 39, in post
+    payload = json.loads(self.request.body.decode('utf-8'))
+  File "/usr/lib/python3.5/json/__init__.py", line 319, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.5/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.5/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.89ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '3a995457-be99-da9b-2805-93179bee7569', 'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "./main.py", line 39, in post
+    payload = json.loads(self.request.body.decode('utf-8'))
+  File "/usr/lib/python3.5/json/__init__.py", line 319, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.5/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.5/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.82ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '3a995457-be99-da9b-2805-93179bee7569', 'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '56', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.86ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '56', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.87ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': '*/*', 'Content-Type': 'application/json', 'Connection': 'close', 'Host': 'localhost:8080', 'Content-Length': '61'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.85ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': '*/*', 'Content-Type': 'application/json', 'Connection': 'close', 'Host': 'localhost:8080', 'Content-Length': '55'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 43, in copyData
+    uid = req['uid']
+KeyError: 'uid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.87ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': '*/*', 'Content-Type': 'application/json', 'Connection': 'close', 'Host': 'localhost:8080', 'Content-Length': '55'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 43, in copyData
+    uid = req['uid']
+KeyError: 'uid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 1.04ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '53', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 0.89ms
+WARNING:tornado.access:404 GET /muieblackcat (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET //phpMyAdmin/scripts/setup.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET //phpmyadmin/scripts/setup.php (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET //pma/scripts/setup.php (127.0.0.1) 0.36ms
+WARNING:tornado.access:404 GET //myadmin/scripts/setup.php (127.0.0.1) 0.44ms
+WARNING:tornado.access:404 GET //MyAdmin/scripts/setup.php (127.0.0.1) 0.43ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Postman-Token': '2e2c9515-a216-31c9-d883-dc097ae49257', 'Accept': '*/*', 'Origin': 'chrome-extension://aicmkgpgakddgnaphhhpliifpcfhicfo', 'Accept-Language': 'en-US,en;q=0.8', 'Host': 'localhost:8080', 'Content-Length': '61', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 42, in copyData
+    sid = req['sid']
+KeyError: 'sid'
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 1.84ms
+WARNING:tornado.access:404 GET /echo.php?info=20161121025428 (127.0.0.1) 0.38ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 45, in copyData
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 3.67ms
+ERROR:tornado.application:Uncaught exception POST /api/get_trust (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/get_trust', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 34, in post
+    payload['uid'], site, db)))
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 60, in gTrust
+    total += yield self.__comparers[i](sid, uid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/ip_adress_checker.py", line 16, in comparer
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/get_trust (127.0.0.1) 3.42ms
+ERROR:tornado.application:Uncaught exception POST /api/get_trust (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/get_trust', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 34, in post
+    payload['uid'], site, db)))
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 60, in gTrust
+    total += yield self.__comparers[i](sid, uid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/ip_adress_checker.py", line 16, in comparer
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/get_trust (127.0.0.1) 3.35ms
+ERROR:tornado.application:Uncaught exception POST /api/get_trust (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/get_trust', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 34, in post
+    payload['uid'], site, db)))
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 60, in gTrust
+    total += yield self.__comparers[i](sid, uid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/ip_adress_checker.py", line 16, in comparer
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/get_trust (127.0.0.1) 3.35ms
+ERROR:tornado.application:Uncaught exception POST /api/get_trust (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/get_trust', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 34, in post
+    payload['uid'], site, db)))
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 60, in gTrust
+    total += yield self.__comparers[i](sid, uid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/ip_adress_checker.py", line 16, in comparer
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/get_trust (127.0.0.1) 2.17ms
+ERROR:tornado.application:Uncaught exception POST /api/get_trust (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/get_trust', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 34, in post
+    payload['uid'], site, db)))
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 60, in gTrust
+    total += yield self.__comparers[i](sid, uid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/ip_adress_checker.py", line 16, in comparer
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/get_trust (127.0.0.1) 3.33ms
+ERROR:tornado.application:Uncaught exception POST /api/reg_usr (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/reg_usr', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 41, in post
+    out = yield rec.rec.copyData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 45, in copyData
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/reg_usr (127.0.0.1) 3.12ms
+ERROR:tornado.application:Uncaught exception POST /api/get_trust (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/get_trust', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Accept': 'application/json, application/xml, text/json, text/x-json, text/javascript, text/xml', 'Host': 'localhost:8080', 'Content-Length': '69', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'no-cache', 'User-Agent': 'RestSharp/105.2.3.0', 'Connection': 'close', 'Content-Type': 'application/json'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 34, in post
+    payload['uid'], site, db)))
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 60, in gTrust
+    total += yield self.__comparers[i](sid, uid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/home/ubuntu/account-hijacking-prevention/ip_adress_checker.py", line 16, in comparer
+    session = yield mongo_int.getSession(sid, site, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/mongo_int.py", line 46, in getSession
+    return((yield ssd.find_one({'sessionID':sid}))['data'])
+TypeError: 'NoneType' object is not subscriptable
+ERROR:tornado.access:500 POST /api/get_trust (127.0.0.1) 2.25ms
+Traceback (most recent call last):
+  File "./main.py", line 69, in <module>
+    app.listen(8080)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1850, in listen
+    server.listen(port, address)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/tcpserver.py", line 126, in listen
+    sockets = bind_sockets(port, address=address)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/netutil.py", line 194, in bind_sockets
+    sock.bind(sockaddr)
+OSError: [Errno 98] Address already in use
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.43ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.40ms
+ERROR:tornado.application:Uncaught exception POST /api/sub_dat (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/sub_dat', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Content-Length': '60', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Origin': 'http://localhost:62784', 'Connection': 'close', 'Accept-Language': 'en-US,en;q=0.8', 'Content-Type': 'text/plain;charset=UTF-8', 'Referer': 'http://localhost:62784/Account/Register', 'Host': 'localhost:8080'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 23, in post
+    out = yield rec.rec.addData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 35, in addData
+    req['sessionID'], site, db)
+KeyError: 'sessionID'
+ERROR:tornado.access:500 POST /api/sub_dat (127.0.0.1) 10.00ms
+WARNING:tornado.access:404 GET /dynamic/collect-vsdoc.js (127.0.0.1) 0.37ms
+WARNING:tornado.access:404 GET /static/js/send-vsdoc.js (127.0.0.1) 0.45ms
+WARNING:tornado.access:404 GET /dynamic/collect.debug.js (127.0.0.1) 0.36ms
+WARNING:tornado.access:404 GET /static/js/send.debug.js (127.0.0.1) 0.40ms
+ERROR:tornado.application:Uncaught exception POST /api/sub_dat (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/sub_dat', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Content-Length': '60', 'Accept-Language': 'en-US,en;q=0.5', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Encoding': 'gzip, deflate', 'Origin': 'http://securetest.azurewebsites.net', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0', 'Connection': 'close', 'Dnt': '1', 'Content-Type': 'text/plain;charset=UTF-8', 'Referer': 'http://securetest.azurewebsites.net/Account/MembersOnly', 'Host': 'localhost:8080'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 23, in post
+    out = yield rec.rec.addData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 35, in addData
+    req['sessionID'], site, db)
+KeyError: 'sessionID'
+ERROR:tornado.access:500 POST /api/sub_dat (127.0.0.1) 3.25ms
+ERROR:tornado.application:Uncaught exception POST /api/sub_dat (127.0.0.1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/api/sub_dat', version='HTTP/1.0', remote_ip='127.0.0.1', headers={'Content-Length': '60', 'Accept-Language': 'en-US,en;q=0.5', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Encoding': 'gzip, deflate', 'Origin': 'http://securetest.azurewebsites.net', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0', 'Connection': 'close', 'Dnt': '1', 'Content-Type': 'text/plain;charset=UTF-8', 'Referer': 'http://securetest.azurewebsites.net/Account/MembersOnly', 'Host': 'localhost:8080'})
+Traceback (most recent call last):
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1469, in _execute
+    result = yield result
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "./main.py", line 23, in post
+    out = yield rec.rec.addData(payload, db)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/gen.py", line 1024, in run
+    yielded = self.gen.send(value)
+  File "/home/ubuntu/account-hijacking-prevention/api.py", line 35, in addData
+    req['sessionID'], site, db)
+KeyError: 'sessionID'
+ERROR:tornado.access:500 POST /api/sub_dat (127.0.0.1) 3.40ms
+WARNING:tornado.access:404 GET /phpmyadmin/scripts/setup.php (127.0.0.1) 0.37ms
+WARNING:tornado.access:404 HEAD /check_proxy (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /xmlrpc.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /cgi/common.cgi (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /stssys.htm (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 POST /command.php (127.0.0.1) 1.12ms
+WARNING:tornado.access:404 GET /plugins/content/plugin_googlemap2_proxy.php?url= (127.0.0.1) 0.42ms
+WARNING:tornado.access:404 GET /plugins/system/plugin_googlemap2_proxy.php?url= (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /plugins/system/plugin_googlemap2/plugin_googlemap2_proxy.php?url= (127.0.0.1) 0.42ms
+WARNING:tornado.access:404 HEAD /phpmyadmin/index.php (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 HEAD /u.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 HEAD /tz.php (127.0.0.1) 0.31ms
+WARNING:tornado.access:404 HEAD /info.php (127.0.0.1) 0.31ms
+WARNING:tornado.access:404 HEAD /ceshi.php (127.0.0.1) 0.30ms
+WARNING:tornado.access:404 HEAD /p.php (127.0.0.1) 0.28ms
+WARNING:tornado.access:404 HEAD /phpinfo.php (127.0.0.1) 0.26ms
+WARNING:tornado.access:404 HEAD /1.php (127.0.0.1) 0.55ms
+WARNING:tornado.access:404 HEAD /php_info.php (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 HEAD /l.php (127.0.0.1) 0.49ms
+WARNING:tornado.access:404 GET /axis2 (127.0.0.1) 0.42ms
+WARNING:tornado.access:404 GET /axis2 (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET /axis2 (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /phpmyadmin/index.php (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /cgi/common.cgi (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /stssys.htm (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 POST /command.php (127.0.0.1) 0.56ms
+WARNING:tornado.access:404 GET /muieblackcat (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET //pma/scripts/setup.php (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET //phpMyAdmin/scripts/setup.php (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET //phpmyadmin/scripts/setup.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /axis2 (127.0.0.1) 0.37ms
+WARNING:tornado.access:404 GET /robots.txt (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /sitemap.xml (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 HEAD /check_proxy (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /phpmyadmin (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /loginAction.action?method:%23_memberAccess%3d@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS,%23req%3d%40org.apache.struts2.ServletActionContext%40getRequest(),%23res%3d%40org.apache.struts2.ServletActionContext%40getResponse(),%23res.setCharacterEncoding(%23parameters.encoding[0]),%23w%3d%23res.getWriter(),%23path%3d%23req.getRealPath(%23parameters.pp[0]),new%20java.io.BufferedWriter(new%20java.io.FileWriter(%23path%2b%23parameters.shellname[0]).append(%23parameters.shellContent[0])).close(),%23w.print(%23parameters.info1[0]),%23w.print(%23parameters.info2[0]),%23w.print(%23path),%23w.close(),1?%23xx:%23request.toString&shellname=lndex.jsp&shellContent=x&encoding=UTF-8&pp=%2f&info1=oko&info2=kok (127.0.0.1) 0.50ms
+WARNING:tornado.access:404 GET /index.do?method:%23_memberAccess%3d@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS,%23req%3d%40org.apache.struts2.ServletActionContext%40getRequest(),%23res%3d%40org.apache.struts2.ServletActionContext%40getResponse(),%23res.setCharacterEncoding(%23parameters.encoding[0]),%23w%3d%23res.getWriter(),%23path%3d%23req.getRealPath(%23parameters.pp[0]),new%20java.io.BufferedWriter(new%20java.io.FileWriter(%23path%2b%23parameters.shellname[0]).append(%23parameters.shellContent[0])).close(),%23w.print(%23parameters.info1[0]),%23w.print(%23parameters.info2[0]),%23w.print(%23path),%23w.close(),1?%23xx:%23request.toString&shellname=lndex.jsp&shellContent=x&encoding=UTF-8&pp=%2f&info1=oko&info2=kok (127.0.0.1) 0.56ms
+WARNING:tornado.access:404 GET /user/login (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /muieblackcat (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET //phpMyAdmin/scripts/setup.php (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET //phpmyadmin/scripts/setup.php (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET //mysqladmin/scripts/setup.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /script (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.42ms
+WARNING:tornado.access:404 GET /clientaccesspolicy.xml (127.0.0.1) 0.44ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.37ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.38ms
+Traceback (most recent call last):
+  File "./main.py", line 69, in <module>
+    app.listen(8080)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/web.py", line 1850, in listen
+    server.listen(port, address)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/tcpserver.py", line 126, in listen
+    sockets = bind_sockets(port, address=address)
+  File "/home/ubuntu/account-hijacking-prevention/venv/lib/python3.5/site-packages/tornado/netutil.py", line 194, in bind_sockets
+    sock.bind(sockaddr)
+OSError: [Errno 98] Address already in use
+WARNING:tornado.access:404 GET //wp-login.php (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /blog//wp-login.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /wordpress//wp-login.php (127.0.0.1) 0.43ms
+WARNING:tornado.access:404 GET /wp//wp-login.php (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.35ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /nmaplowercheck1480883897 (127.0.0.1) 0.30ms
+WARNING:tornado.access:404 GET /.git/HEAD (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.31ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.36ms
+WARNING:tornado.access:404 GET /robots.txt (127.0.0.1) 0.37ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.37ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.32ms
+WARNING:tornado.access:405 RREU / (127.0.0.1) 0.32ms
+WARNING:tornado.access:404 GET /HNAP1 (127.0.0.1) 0.48ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.31ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.38ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.31ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.41ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.38ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.41ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.29ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.44ms
+WARNING:tornado.access:404 GET /.git/HEAD (127.0.0.1) 0.31ms
+WARNING:tornado.access:404 GET /nmaplowercheck1480884190 (127.0.0.1) 0.29ms
+WARNING:tornado.access:404 GET /robots.txt (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.49ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.43ms
+WARNING:tornado.access:405 SHCM / (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.50ms
+WARNING:tornado.access:404 GET /HNAP1 (127.0.0.1) 0.43ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.46ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.46ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.63ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.32ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.48ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.33ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.45ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.31ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.41ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /nmaplowercheck1480884292 (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.35ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.32ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.27ms
+WARNING:tornado.access:404 GET /.git/HEAD (127.0.0.1) 0.29ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.31ms
+WARNING:tornado.access:404 GET /robots.txt (127.0.0.1) 0.28ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.59ms
+WARNING:tornado.access:404 GET /HNAP1 (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 YRQZ / (127.0.0.1) 0.37ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.32ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.34ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.36ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.45ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.36ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.34ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.34ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.41ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.68ms
+WARNING:tornado.access:404 GET /.git/HEAD (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.29ms
+WARNING:tornado.access:404 GET /robots.txt (127.0.0.1) 0.29ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.27ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.38ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.28ms
+WARNING:tornado.access:404 GET /nmaplowercheck1480887654 (127.0.0.1) 0.28ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.35ms
+WARNING:tornado.access:405 PROPFIND / (127.0.0.1) 0.33ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.29ms
+WARNING:tornado.access:405 ZTIL / (127.0.0.1) 0.33ms
+WARNING:tornado.access:404 GET /HNAP1 (127.0.0.1) 0.43ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /favicon.ico (127.0.0.1) 0.40ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.30ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.38ms
+WARNING:tornado.access:405 POST / (127.0.0.1) 0.32ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.39ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.31ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.40ms
+WARNING:tornado.access:405 OPTIONS / (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 GET /robots.txt (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /sitemap.xml (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET //pma/scripts/setup.php (127.0.0.1) 0.78ms
+WARNING:tornado.access:404 GET //myadmin/scripts/setup.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 HEAD /phpmyadmin/index.php (127.0.0.1) 0.38ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET /clientaccesspolicy.xml (127.0.0.1) 0.46ms
+WARNING:tornado.access:404 GET /xmlrpc.php (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /manager/html (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 HEAD /check_proxy (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /xmlrpc.php (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET /axis-cgi/jpg/image.cgi (127.0.0.1) 0.40ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.71ms
+WARNING:tornado.access:404 HEAD /wp-login.php (127.0.0.1) 0.39ms
+WARNING:tornado.access:404 HEAD /wp-content/ (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 HEAD /magmi/ (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 HEAD /skin/adminhtml/ (127.0.0.1) 0.50ms
+WARNING:tornado.access:404 HEAD /app/Mage.php (127.0.0.1) 0.53ms
+WARNING:tornado.access:404 GET /echo.php?info=20161210103723 (127.0.0.1) 0.42ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /cgi/common.cgi (127.0.0.1) 0.40ms
+WARNING:tornado.access:404 GET /stssys.htm (127.0.0.1) 0.71ms
+WARNING:tornado.access:404 POST /command.php (127.0.0.1) 1.17ms
+WARNING:tornado.access:405 HEAD / (127.0.0.1) 0.38ms
+WARNING:tornado.access:404 GET /.git/config (127.0.0.1) 0.41ms
+WARNING:tornado.access:404 GET /.git/config (127.0.0.1) 0.44ms
+WARNING:tornado.access:404 GET /.git/config (127.0.0.1) 0.39ms
