@@ -6,7 +6,7 @@ function send(id, data, ck, sid){
 			alert('ran');
 		}
 	}
-	xhttpr.open("POST", "http://54.202.247.3/api/sub_dat")
+	xhttpr.open("POST", "http://localhost:8080/api/sub_dat")
 	//xhttpr.send('name='+id+'&data='+data+'&ck='+ck+'&sessionID='+sid+'&site=test')
 	xhttpr.send(JSON.stringify({'name':id,'data':data,'ck':ck,'sessionID':sid,'site':'test'}))
 }
