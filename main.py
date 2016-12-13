@@ -47,9 +47,8 @@ class apiValUsr(tornado.web.RequestHandler):
 	def post(self):
 		db = self.settings['db']
 		payload = json.loads(self.request.body.decode('utf-8'))
-		#email.confirm(payload['email'], code)
-		#mongo_int.storeUserValCode(code, payload['uid'],
-		#	payload['ak'], db)
+		site = yield mongo_int.getSiteByServerKey(payload['ak'], db)
+		verify.makeCode(uid, sid, site, db)
 		return('OK')
 
 class apiValCode(tornado.web.RequestHandler):

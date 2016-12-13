@@ -70,6 +70,17 @@ def writeUser(uid, data, site, db):
 	#check if the user already exists
 	#if so merge their data
 
+@gen.coroutine
+def setUserCode(code, uid, site, db):
+	suc = db['userCodes_site-' + str(site)]
+	suc.find_one_and_replace({'userID':uid}, {'userID':uid, 'code':code}, upsert=True)
+
+@gen.coroutine
+def getUserCode(uid, site, db):
+	suc = db['userCodes_site-' + str(site)]
+	user = suc.findOne({'uid':uid})
+	return(user['code'])
+
 def sessionToUser(SID, UID, site):
 	ssd = db['sessionData_site-' + site]
 	sud = db['userData_site-' + site]
