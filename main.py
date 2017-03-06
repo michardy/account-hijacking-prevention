@@ -36,7 +36,7 @@ class apiGetTrust(tornado.web.RequestHandler):
 		site = yield mongo_int.getSiteByServerKey(payload['ak'], db)
 		if site:
 			trust = (yield rec.rec.gTrust(payload['sid'],
-				payload['uid'], site, db)))
+				payload['uid'], site, db))
 			self.set_status(trust[0])
 			self.write(trust[1])
 		else:
