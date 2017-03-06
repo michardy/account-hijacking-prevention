@@ -35,8 +35,10 @@ class apiGetTrust(tornado.web.RequestHandler):
 		payload = json.loads(self.request.body.decode('utf-8'))
 		site = yield mongo_int.getSiteByServerKey(payload['ak'], db)
 		if site:
-			self.write((yield rec.rec.gTrust(payload['sid'],
+			trust = (yield rec.rec.gTrust(payload['sid'],
 				payload['uid'], site, db)))
+			self.set_status(trust[0])
+			self.write(trust[1])
 		else:
 			self.set_status(401)
 			self.write('Unauthorised')

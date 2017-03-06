@@ -50,10 +50,14 @@ class receiver():
 		site = yield mongo_int.getSiteByServerKey(req['ak'], db)
 		session = yield mongo_int.getSession(sid, site, db)
 		user = {'sessionID': sid, 'data':{}}
-		for dt in session.keys():
-			user['data'][dt] = self.__translators[dt](session[dt])
-		mongo_int.writeUser(uid, user, site, db)
-		return(200, 'OK')
+		if session.keys():
+			for dt in session.keys():
+				user['data'][dt] = self.__translators[dt](session[dt])
+			mongo_int.writeUser(uid, user, site, db)
+			return(200, 'OK')
+		else:
+			logger.warning ('Client attempted to register user with expired or nonexistent session')
+			return(410, 'Gone.  Client attempted to register user with expired or nonexistent session.  ')
 
 	@gen.coroutine
 	def gTrust(self, sid, uid, site, db):
@@ -63,8 +67,8 @@ class receiver():
 			actmax += self.__maxscores[i]
 			total += yield self.__comparers[i](sid, uid, site, db)
 		try:
-			out = str(total/actmax)
+			out = (200, str(total/actmax))
 		except ZeroDivisionError:
-			logger.error('No fresh session data')
-			out = "-1"
+			logger.critical('This server does not have any client data collection and analysis modules installed')
+			out = (501, 'This server does not have any data collection and analysis modules installed')
 		return(out)
