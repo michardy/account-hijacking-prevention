@@ -1,3 +1,5 @@
+#module that generates and emails device adding codes
+
 import smtplib
 import hashlib
 import mongo_int

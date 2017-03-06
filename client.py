@@ -1,3 +1,5 @@
+#class that stores js functions for dynamically generated API client (collect.js)
+
 class client():
 	def __init__(self):
 		self.fxns = []

@@ -1,6 +1,6 @@
 #! venv/bin/python
 # This script is the main script
-# It responds to HTTP requests and connects to the server
+# It responds to HTTP requests
 
 import tornado.ioloop
 import tornado.web
