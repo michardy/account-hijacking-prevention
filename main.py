@@ -24,7 +24,7 @@ class apiSubmitData(tornado.web.RequestHandler):
 		self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		out = yield rec.rec.addData(payload, db)
+		out = yield rec.rec.addData(payload, self.request.headers, db)
 		self.set_status(out[0])
 		self.write(out[1])
 

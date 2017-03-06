@@ -8,8 +8,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 @gen.coroutine
-def hasher(data, key, ref, db):
-	salt = yield mongo_int.getSalt(key, ref, db, 'fingerprint')
+def hasher(data, key, headers, db):
+	salt = yield mongo_int.getSalt(key, headers.get('Host'), db,
+		'fingerprint')
 	return(hashlib.sha512(data.encode('utf-8') + salt).hexdigest())
 
 rec.rec.addHasher('fingerprint', hasher)

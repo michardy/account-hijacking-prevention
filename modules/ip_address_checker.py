@@ -8,9 +8,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 @gen.coroutine
-def hasher(data, key, ref, db):
-	salt = yield mongo_int.getSalt(key, ref, db, 'ip')
-	return(hashlib.sha512(data.encode('utf-8') + salt).hexdigest())
+def hasher(data, key, headers, db):
+	salt = yield mongo_int.getSalt(key, headers.get('Host'), db,
+		'ip')
+	ip = headers.get('X-Real-IP')
+	return(hashlib.sha512(ip.encode('utf-8') + salt).hexdigest())
 
 rec.rec.addHasher('ip', hasher)
 

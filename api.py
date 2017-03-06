@@ -29,11 +29,13 @@ class receiver():
 		self.__maxscores[name] = score
 
 	@gen.coroutine
-	def addData(self, req, db): #called when data is received
+	def addData(self, req, headers, db): #called when data is received
 		#TODO: move this fxn out of this class?
 		if req['name'] in self.__comparers.keys():
-			hash = yield self.__hashers[req['name']](req['data'], req['ck'], 'test', db)
-			site = yield mongo_int.getSiteByClientKey(req['ck'], 'test', db)
+			hash = yield self.__hashers[req['name']](req['data'],
+				req['ck'], headers, db)
+			site = yield mongo_int.getSiteByClientKey(req['ck'],
+				headers.get("Host"), db)
 			yield mongo_int.addToSession(hash, req['name'],
 				req['sessionID'], site, db)
 			return(200, 'OK')
