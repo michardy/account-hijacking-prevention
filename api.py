@@ -57,7 +57,7 @@ class receiver():
 			return(200, 'OK')
 		else:
 			logger.warning ('Client attempted to register user with expired or nonexistent session')
-			return(410, 'Gone.  Client attempted to register user with expired or nonexistent session.  ')
+			return(404, 'Invalid Session')
 
 	@gen.coroutine
 	def gTrust(self, sid, uid, site, db):
