@@ -7,7 +7,7 @@ from tornado import gen
 @gen.coroutine
 def hasher(data, key, ref, db):
 	salt = yield mongo_int.getSalt(key, ref, db, 'ip')
-	return(hashlib.sha512(data.encode('utf-8') + salt.encode('utf-8')).hexdigest())
+	return(hashlib.sha512(data.encode('utf-8') + salt).hexdigest())
 
 rec.rec.addHasher('ip', hasher)
 

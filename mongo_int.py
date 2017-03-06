@@ -1,5 +1,6 @@
 # This file handles reading and writing data to the databse
 import datetime
+import base64
 from tornado import gen
 
 @gen.coroutine
@@ -25,7 +26,7 @@ def session_update(session, data, type):
 def getSalt(key, ref, db, type):
 	sl = db['siteList']
 	site = yield sl.find_one({'clientKey':key})
-	return(site['salts'][type])
+	return(base64.b64decode(site['salts'][type]))
 
 @gen.coroutine
 def addToSession(data, type, session, site, db):
