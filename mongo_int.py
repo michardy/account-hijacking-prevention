@@ -65,16 +65,12 @@ def writeUser(uid, data, site, db):
 	try:
 		res = sud.findOne({'uid':uid})
 	except TypeError:
-		res = False
-	if not res:
 		res = {'uid':uid, 'data':{}}
-	print(data)
-	print(res)
-	for k in data['data'].keys():
-		if k in res['data'].keys():
-			res['data'][k].append(data['data'][k])
+	for k in data.keys():
+		if k in res['data'].keys() and data[k] not in res['data'][k]:
+			res['data'][k].append(data[k])
 		else:
-			res['data'][k] = [data['data'][k]]
+			res['data'][k] = [data[k]]
 	sud.find_one_and_replace({'uid':uid}, res, upsert=True)
 	#check if the user already exists
 	#if so merge their data

@@ -49,11 +49,11 @@ class receiver():
 		uid = req['uid']
 		site = yield mongo_int.getSiteByServerKey(req['ak'], db)
 		session = yield mongo_int.getSession(sid, site, db)
-		user = {'sessionID': sid, 'data':{}}
 		if session.keys():
+			data = {}
 			for dt in session.keys():
-				user['data'][dt] = self.__translators[dt](session[dt])
-			mongo_int.writeUser(uid, user, site, db)
+				data[dt] = self.__translators[dt](session[dt])
+			mongo_int.writeUser(uid, data, site, db)
 			return(200, 'OK')
 		else:
 			logger.warning ('Client attempted to register user with expired or nonexistent session')
