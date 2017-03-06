@@ -6,6 +6,9 @@ import mongo_int
 import tornado.ioloop
 from tornado import gen
 
+import logging
+logger = logging.getLogger(__name__)
+
 class receiver():
 	def __init__(self):
 		self.__hashers = {}
@@ -35,7 +38,8 @@ class receiver():
 				req['sessionID'], site, db)
 			return(200, 'OK')
 		else:
-			return(400, 'Err: Could not find a handler for "' + req.get_argument('name') + '"')
+			logger.warning('Could not find a handler for "' + req['name'] + '"')
+			return(400, 'Err: Could not find a handler for "' + req['name'] + '"')
 
 	@gen.coroutine
 	def copyData(self, req, db):

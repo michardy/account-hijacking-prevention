@@ -6,12 +6,15 @@ import tornado.ioloop
 import tornado.web
 import motor.motor_tornado
 import json
-import rec #rename modules
+import logging
+import rec #TODO: rename to modules
 import config
 import client
 import mongo_int
 import verify
 from tornado import gen
+
+logger = logging.getLogger()
 
 class apiSubmitData(tornado.web.RequestHandler):
 	@gen.coroutine
@@ -37,6 +40,7 @@ class apiGetTrust(tornado.web.RequestHandler):
 		else:
 			self.set_status(401)
 			self.write('Unauthorised')
+			logger.warning('Attempted Unauthorised Access from: ' + self.request.remote_ip)
 
 class apiRegisterUser(tornado.web.RequestHandler):
 	@gen.coroutine
