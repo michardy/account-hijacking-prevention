@@ -60,4 +60,9 @@ class receiver():
 		for i in self.__comparers.keys():
 			actmax += self.__maxscores[i]
 			total += yield self.__comparers[i](sid, uid, site, db)
-		return(str(total/actmax))
+		try:
+			out = str(total/actmax)
+		except ZeroDivisionError:
+			logger.error('No fresh session data')
+			out = "-1"
+		return(out)
