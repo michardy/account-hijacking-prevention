@@ -21,7 +21,10 @@ def comparer(sid, uid, site, db):
 	session = yield mongo_int.getSession(sid, site, db)
 	user = yield mongo_int.getUserDat(uid, site, db)
 	try:
-		return(bcrypt.hashpw(session['ip']['data'].encode('utf-8'), user['ip'][0]) == user['ip'][0])
+		for h in user['ip']:
+			if bcrypt.hashpw(session['ip']['data'].encode('utf-8'), h) == h:
+				return(True)
+		return(False)
 	except KeyError:
 		logger.error('User session data expired')
 		return(0)
