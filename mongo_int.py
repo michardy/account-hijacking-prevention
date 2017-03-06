@@ -1,7 +1,10 @@
 # This file handles reading and writing data to the databse
 import datetime
 import base64
+import logging
 from tornado import gen
+
+logger = logging.getLogger(__name__)
 
 @gen.coroutine
 def getSiteByClientKey(key, ref, db):
@@ -18,7 +21,7 @@ def getSiteByServerKey(key, db):
 def session_update(session, data, type):
 	session[type]['data'] = data
 	curTime = datetime.datetime.utcnow()
-	tDelta = datetime.timedelta(hours=60)
+	tDelta = datetime.timedelta(hours=1)
 	session[type]['expireTime'] = curTime + tDelta #set the data to expire in an hour
 	return(session)
 
@@ -44,7 +47,12 @@ def addToSession(data, type, session, site, db):
 @gen.coroutine
 def getSession(sid, site, db):
 	ssd = db['sessionData_site-' + str(site)]
-	return((yield ssd.find_one({'sessionID':sid}))['data'])
+	rdat = (yield ssd.find_one({'sessionID':sid}))['data']
+	out = {}
+	for k in rdat.keys():
+		if rdat[k]['expireTime'] > datetime.datetime.utcnow():
+			out[k] = rdat[k]
+	return(out)
 
 @gen.coroutine
 def getUserDat(uid, site, db):
