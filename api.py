@@ -69,11 +69,13 @@ class Receiver():
 		"""This scores how trustworth a user is as a number between 1 and zero.  
 		The score is based on how much session data matches the data stored in their user profile
 		"""
+		user = yield mongo_int.get_user_dat(uid, site, db)
+		session = yield mongo_int.get_session(sid, site, db)
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():
 			actmax += self.__maxscores[i]
-			total += yield self.__comparers[i](sid, uid, site, db)
+			total += yield self.__comparers[i](session, user, site, db)
 		try:
 			out = (200, str(total/actmax))
 		except ZeroDivisionError:

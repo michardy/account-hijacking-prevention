@@ -16,9 +16,7 @@ def hasher(data, key, headers, db):
 rec.rec.add_hasher('fingerprint', hasher)
 
 @gen.coroutine
-def comparer(sid, uid, site, db):
-	session = yield mongo_int.get_session(sid, site, db)
-	user = yield mongo_int.get_user_dat(uid, site, db)
+def comparer(session, user, site, db):
 	try:
 		for h in user['fingerprint']:
 			if bcrypt.hashpw(session['fingerprint']['data'].encode('utf-8'), h) == h:
