@@ -71,19 +71,13 @@ def write_user(uid, data, site, db):
 	"""This creates new users and merges new data into ones that already exist."""
 	sud = db['userData_site-' + str(site)]
 	try:
-		res = sud.findOne({'uid':uid}) #Try to find user
+		res = yield sud.find_one({'uid':uid}) #Try to find user
 	except TypeError:
 		res = {'uid':uid, 'data':{}} #Create a user object if they dont exist
 	for k in data.keys():
-		if k in res['data'].keys() and data[k] not in res['data'][k]:
-			print(res['data'][k])
-			print(data[k])
+		if k in res['data'].keys():
 			res['data'][k].append(data[k])
-			print(res['data'][k])
 		else:
-			print(k in res['data'].keys())
-			print(k)
-			print(res['data'].keys())
 			res['data'][k] = [data[k]]
 	sud.find_one_and_replace({'uid':uid}, res, upsert=True) #replace/create user
 
