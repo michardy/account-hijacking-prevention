@@ -30,7 +30,6 @@ class receiver():
 
 	@gen.coroutine
 	def addData(self, req, headers, db): #called when data is received
-		#TODO: move this fxn out of this class?
 		if req['name'] in self.__comparers.keys():
 			hash = yield self.__hashers[req['name']](req['data'],
 				req['ck'], headers, db)
