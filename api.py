@@ -69,16 +69,23 @@ class Receiver():
 		"""This scores how trustworth a user is as a number between 1 and zero.  
 		The score is based on how much session data matches the data stored in their user profile
 		"""
-		user = yield mongo_int.get_user_dat(uid, site, db)
-		session = yield mongo_int.get_session(sid, site, db)
+		try:
+			user = yield mongo_int.get_user_dat(uid, site, db)
+		except TypeError:
+			logger.warning('Client attempted to get trust for nonexistant user')
+			return(404, "Invalid User")
+		try:
+			session = yield mongo_int.get_session(sid, site, db)
+		except TypeError:
+			logger.warning('Client attempted to get trust for expired or non existant session')
+			return(404, "Invalid Session")
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():
 			actmax += self.__maxscores[i]
 			total += yield self.__comparers[i](session, user, site, db)
 		try:
-			out = (200, str(total/actmax))
+			return(200, str(total/actmax))
 		except ZeroDivisionError:
 			logger.critical('This server does not have any client data collection and analysis modules installed')
-			out = (501, 'This server does not have any data collection and analysis modules installed')
-		return(out)
+			return(501, 'This server does not have any data collection and analysis modules installed')
