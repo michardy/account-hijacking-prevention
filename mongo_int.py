@@ -7,11 +7,14 @@ from tornado import gen
 logger = logging.getLogger(__name__)
 
 @gen.coroutine
-def get_site_by_client_key(key, ref, db):
+def get_site_by_client_key(key, host, db):
 	"""Get site database ID based on web client API key."""
 	sl = db['siteList']
 	site = yield sl.find_one({'clientKey':key})
-	return(str(site['_id']))
+	if site['host'] == host:
+		return(str(site['_id']))
+	else:
+		return(0)
 
 @gen.coroutine
 def get_site_by_server_key(key, db):

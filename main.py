@@ -69,7 +69,8 @@ class ApiValCode(tornado.web.RequestHandler):
 	"""Handels API call to validate confirmation code."""
 	def post(self):
 		db = self.settings['db']
-		site = yield mongo_int.get_site_by_client_key(self.get_argument('ck'))
+		site = yield mongo_int.get_site_by_client_key(self.get_argument('ck'),
+			self.request.headers.get('Host'), db)
 		uid = self.get_argument('uid')
 		sid = self.get_argument('sid')
 		#code = yield mongo_int.getUserValCode(uid, site)
