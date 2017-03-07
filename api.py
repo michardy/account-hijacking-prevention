@@ -9,6 +9,10 @@ from tornado import gen
 import logging
 logger = logging.getLogger(__name__)
 
+INVALID_USER = (404, 'Invalid user')
+INVALID_SESSION = (404, 'Invalid session'))
+OK = (200, 'OK')
+
 class Receiver():
 	"""The API request receiver class"""
 	def __init__(self):
@@ -42,7 +46,7 @@ class Receiver():
 				headers.get("Host"), db)
 			yield mongo_int.add_to_session(hash, req['name'],
 				req['sessionID'], site, db)
-			return(200, 'OK')
+			return(OK)
 		else:
 			logger.warning('Could not find a handler for "' + req['name'] + '"')
 			return(400, 'Err: Could not find a handler for "' + req['name'] + '"')
@@ -59,10 +63,9 @@ class Receiver():
 			for dt in session.keys():
 				data[dt] = self.__translators[dt](session[dt])
 			mongo_int.write_user(uid, data, site, db)
-			return(200, 'OK')
+			return(OK)
 		else:
-			logger.warning ('Client attempted to register user with expired or nonexistent session')
-			return(404, 'Invalid Session')
+			return(INVALID_SESSION)
 
 	@gen.coroutine
 	def get_trust(self, sid, uid, site, db):
@@ -72,13 +75,11 @@ class Receiver():
 		try:
 			user = yield mongo_int.get_user_dat(uid, site, db)
 		except TypeError:
-			logger.warning('Client attempted to get trust for nonexistant user')
-			return(404, "Invalid User")
+			return(INVALID_SESSION)
 		try:
 			session = yield mongo_int.get_session(sid, site, db)
 		except TypeError:
-			logger.warning('Client attempted to get trust for expired or non existant session')
-			return(404, "Invalid Session")
+			return(INVALID_SESSION)
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():

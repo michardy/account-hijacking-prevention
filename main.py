@@ -7,7 +7,7 @@ import tornado.web
 import motor.motor_tornado
 import json
 import logging
-import rec #TODO: rename to modules
+import rec
 import config
 import client
 import mongo_int
