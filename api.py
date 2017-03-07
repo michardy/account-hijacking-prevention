@@ -10,26 +10,31 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Receiver():
+	"""The API request receiver class"""
 	def __init__(self):
 		self.__hashers = {}
 		self.__translators = {}
 		self.__comparers = {}
 		self.__maxscores = {}
 
-	def add_hasher(self, name, fxn): #called on by any data hashing module on startup
-		#registers a function to hash a type of data
+	def add_hasher(self, name, fxn): 
+		"""This is called by each module on startup to register its sitewide hasher.  """
 		self.__hashers[name] = fxn
 
 	def add_translator(self, name, fxn):
+		"""This is called by each module on startup to register its data translator.
+		Translators hash data with a per user salt and hash.  
+		"""
 		self.__translators[name] = fxn
 
-	def add_comparer(self, name, fxn, score): #called by any data collecting module on startup
-		#registers a function to compare hashes of a type of data
+	def add_comparer(self, name, fxn, score):
+		"""This is called by each module on startup to register its hash comparer.  """
 		self.__comparers[name] = fxn
 		self.__maxscores[name] = score
 
 	@gen.coroutine
-	def add_data(self, req, headers, db): #called when data is received
+	def add_data(self, req, headers, db):
+		"""This function is called when data is received to store data"""
 		if req['name'] in self.__comparers.keys():
 			hash = yield self.__hashers[req['name']](req['data'],
 				req['ck'], headers, db)
@@ -44,6 +49,7 @@ class Receiver():
 
 	@gen.coroutine
 	def copy_data(self, req, db):
+		"""This function is called to store session data permenantly to the user profile"""
 		sid = req['sid']
 		uid = req['uid']
 		site = yield mongo_int.get_site_by_server_key(req['ak'], db)
@@ -60,6 +66,9 @@ class Receiver():
 
 	@gen.coroutine
 	def get_trust(self, sid, uid, site, db):
+		"""This scores how trustworth a user is as a number between 1 and zero.  
+		The score is based on how much session data matches the data stored in their user profile
+		"""
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():

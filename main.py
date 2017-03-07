@@ -17,6 +17,7 @@ from tornado import gen
 logger = logging.getLogger()
 
 class ApiSubmitData(tornado.web.RequestHandler):
+	"""Receives data submitted by collect.js and send.js"""
 	@gen.coroutine
 	def post(self):
 		self.set_header("Access-Control-Allow-Origin", "*")
@@ -29,6 +30,7 @@ class ApiSubmitData(tornado.web.RequestHandler):
 		self.write(out[1])
 
 class ApiGetTrust(tornado.web.RequestHandler):
+	"""Handles API call to calculate user trust score."""
 	@gen.coroutine
 	def post(self):
 		db = self.settings['db']
@@ -45,6 +47,7 @@ class ApiGetTrust(tornado.web.RequestHandler):
 			logger.warning('Attempted Unauthorised Access from: ' + self.request.remote_ip)
 
 class ApiRegisterUser(tornado.web.RequestHandler):
+	"""Handles API call to register or update a user"""
 	@gen.coroutine
 	def post(self):
 		payload = json.loads(self.request.body.decode('utf-8'))
@@ -54,6 +57,7 @@ class ApiRegisterUser(tornado.web.RequestHandler):
 		self.write(out[1])
 
 class ApiValUsr(tornado.web.RequestHandler):
+	"""Handles API call to send a confirmation code by email."""
 	def post(self):
 		db = self.settings['db']
 		payload = json.loads(self.request.body.decode('utf-8'))
@@ -62,6 +66,7 @@ class ApiValUsr(tornado.web.RequestHandler):
 		return('OK')
 
 class ApiValCode(tornado.web.RequestHandler):
+	"""Handels API call to validate confirmation code."""
 	def post(self):
 		db = self.settings['db']
 		site = yield mongo_int.get_site_by_client_key(self.get_argument('ck'))
@@ -73,16 +78,19 @@ class ApiValCode(tornado.web.RequestHandler):
 			#yield rec.rec.copyData({'sid':sid, 'uid':uid}, db)
 
 class Collect(tornado.web.RequestHandler):
+	"""Renders template of collect.js"""
 	def get(self):
 		self.set_header("Content-Type", 'application/javascript; charset="utf-8"')
 		self.render('collect.js', collectors=rec.mods.fxns,
 			col_list = json.dumps(rec.mods.fxnNames))
 
 class TestPage(tornado.web.RequestHandler):
+	"""Renders Welcome Page"""
 	def get(self):
 		self.render('index.html')
 
 class AskUser(tornado.web.RequestHandler):
+	"""Renders template of confirmation code submission page"""
 	def get(self):
 		self.render('verify.html', sid=self.get_argument('sid'),
 			ck=self.get_argument('ck'))

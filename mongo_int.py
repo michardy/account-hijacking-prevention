@@ -8,17 +8,20 @@ logger = logging.getLogger(__name__)
 
 @gen.coroutine
 def get_site_by_client_key(key, ref, db):
+	"""Get site database ID based on web client API key."""
 	sl = db['siteList']
 	site = yield sl.find_one({'clientKey':key})
 	return(str(site['_id']))
 
 @gen.coroutine
 def get_site_by_server_key(key, db):
+	"""Get site database ID based on server API key."""
 	sl = db['siteList']
 	site = yield sl.find_one({'serverKey':key})
 	return(site['_id'])
 
 def session_update(session, data, type):
+	"""Updates a data field in a session to expire in an hour."""
 	session[type]['data'] = data
 	cur_time = datetime.datetime.utcnow()
 	time_delta = datetime.timedelta(hours=1)
@@ -27,12 +30,14 @@ def session_update(session, data, type):
 
 @gen.coroutine
 def get_salt(key, ref, db, type):
+	"""Gets sitewide salt for specific data type."""
 	sl = db['siteList']
 	site = yield sl.find_one({'clientKey':key})
 	return(base64.b64decode(site['salts'][type]))
 
 @gen.coroutine
 def add_to_session(data, type, session, site, db):
+	"""Adds data to session."""
 	ssd = db['sessionData_site-' + site]
 	result = yield ssd.find_one({'sessionID':session})
 	if result:
@@ -46,6 +51,7 @@ def add_to_session(data, type, session, site, db):
 
 @gen.coroutine
 def get_session(sid, site, db):
+	"""Removes expired data from a session based and returns the results."""
 	ssd = db['sessionData_site-' + str(site)]
 	rdat = (yield ssd.find_one({'sessionID':sid}))['data']
 	out = {}
@@ -56,16 +62,18 @@ def get_session(sid, site, db):
 
 @gen.coroutine
 def get_user_dat(uid, site, db):
+	"""Returns data associated with given user ID."""
 	sud = db['userData_site-' + str(site)]
 	return((yield sud.find_one({'uid':uid}))['data'])
 
 @gen.coroutine
 def write_user(uid, data, site, db):
+	"""This creates new users and merges new data into ones that already exist."""
 	sud = db['userData_site-' + str(site)]
 	try:
-		res = sud.findOne({'uid':uid})
+		res = sud.findOne({'uid':uid}) #Try to find user
 	except TypeError:
-		res = {'uid':uid, 'data':{}}
+		res = {'uid':uid, 'data':{}} #Create a user object if they dont exist
 	for k in data.keys():
 		if k in res['data'].keys() and data[k] not in res['data'][k]:
 			print(res['data'][k])
@@ -77,26 +85,17 @@ def write_user(uid, data, site, db):
 			print(k)
 			print(res['data'].keys())
 			res['data'][k] = [data[k]]
-	sud.find_one_and_replace({'uid':uid}, res, upsert=True)
-	#check if the user already exists
-	#if so merge their data
+	sud.find_one_and_replace({'uid':uid}, res, upsert=True) #replace/create user
 
 @gen.coroutine
 def set_user_code(code, uid, site, db):
+	"""Stores a user's temporary authentication code."""
 	suc = db['userCodes_site-' + str(site)]
 	suc.find_one_and_replace({'userID':uid}, {'userID':uid, 'code':code}, upsert=True)
 
 @gen.coroutine
 def get_user_code(uid, site, db):
+	"""Retreives a user's temporary authentication code"""
 	suc = db['userCodes_site-' + str(site)]
 	user = suc.findOne({'uid':uid})
 	return(user['code'])
-
-def session_to_user(SID, UID, site):
-	ssd = db['sessionData_site-' + site]
-	sud = db['userData_site-' + site]
-	result = ssd.find_one({'sessionID':session})
-	if result:
-		result.pop('sessionID', None)
-		result['userID'] = UID
-		sud.insert(result)
