@@ -17,9 +17,9 @@ class Session(db_int.Interface):
 		self.__db = db
 
 	@gen.coroutine
-	def read_db(self, site, db):
+	def read_db(self, site):
 		"""Removes expired data from a session and returns the results."""
-		ssd = db[self.__data_type + str(site)]
+		ssd = self.__db[self.__data_type + str(site)]
 		rdat = (yield ssd.find_one({'sessionID':self.__id}))['data']
 		self.data = {}
 		for k in rdat.keys():

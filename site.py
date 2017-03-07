@@ -7,7 +7,7 @@ import db_int
 logger = logging.getLogger(__name__)
 
 class Site(db_int.Interface):
-	def __init__(self):
+	def __init__(self, db):
 		self.__salts = {}
 		self.__id_type = '_id'
 		self.__id = None
@@ -15,11 +15,12 @@ class Site(db_int.Interface):
 		self.__host = None
 		self.__client_key = None
 		self.__server_key = None
+		self.__db = db
 
 	@gen.coroutine
-	def get_by_client_key(self, key, host, db):
+	def get_by_client_key(self, key, host):
 		"""Get site based on web client API key."""
-		sl = db[self.__data_type]
+		sl = self.__db[self.__data_type]
 		site = yield sl.find_one({'clientKey':key})
 		if site['host'] == host:
 			self.__id = site['_id']
@@ -29,9 +30,9 @@ class Site(db_int.Interface):
 			self.__server_key = site['serverKey']
 
 	@gen.coroutine
-	def get_by_server_key(self, key, db):
+	def get_by_server_key(self, key):
 		"""Get site based on server API key."""
-		sl = db[self.__data_type]
+		sl = self.__db[self.__data_type]
 		site = yield sl.find_one({'serverKey':key})
 		self.__id = site['_id']
 		self.__salts = site['salts']

@@ -17,9 +17,9 @@ class User(db_int.Interface):
 		self.__db = db
 
 	@gen.coroutine
-	def read_db(self, site, db):
+	def read_db(self, site):
 		"""Reads user object from DB."""
-		sud = db[self.__id_type + str(site)]
+		sud = self.__db[self.__id_type + str(site)]
 		user = yield sud.find_one({'uid':self.__id}) #Try to find user
 		if user is not None:
 			self.data = user['data']
