@@ -1,3 +1,5 @@
+from tornado import gen
+
 class Interface():
 	"""Generic databse interface"""
 	@gen.coroutine
