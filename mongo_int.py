@@ -36,13 +36,13 @@ def add_to_session(data, type, session, site, db):
 	ssd = db['sessionData_site-' + site]
 	result = yield ssd.find_one({'sessionID':session})
 	if result:
-		dataObj = result['data']
+		data_obj = result['data']
 	else:
-		dataObj = {}
-	dataObj[type] = {}
-	dataObj[type]['data'] = data
-	dataObj = session_update(dataObj, data, type)
-	ssd.find_one_and_replace({'sessionID':session}, {'sessionID':session, 'data':dataObj}, upsert=True)
+		data_obj = {}
+	data_obj[type] = {}
+	data_obj[type]['data'] = data
+	data_obj = session_update(data_obj, data, type)
+	ssd.find_one_and_replace({'sessionID':session}, {'sessionID':session, 'data':data_obj}, upsert=True)
 
 @gen.coroutine
 def get_session(sid, site, db):

@@ -9,7 +9,7 @@ from tornado import gen
 import logging
 logger = logging.getLogger(__name__)
 
-class receiver():
+class Receiver():
 	def __init__(self):
 		self.__hashers = {}
 		self.__translators = {}
