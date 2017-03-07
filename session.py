@@ -9,17 +9,18 @@ logger = logging.getLogger(__name__)
 
 class Session(db_int.Interface):
 	"""This class handles reading, writing, and manipulating session objects."""
-	def __init__(self, sid, db):
+	def __init__(self, sid, site, db):
 		self.__id_type = "sid"
 		self.__id = sid
 		self.__data_type= 'sessionData_site-'
 		self.data = {}
+		self.__site = str(site)
 		self.__db = db
 
 	@gen.coroutine
-	def read_db(self, site):
+	def read_db(self):
 		"""Removes expired data from a session and returns the results."""
-		ssd = self.__db[self.__data_type + str(site)]
+		ssd = self.__db[self.__data_type + self.__site]
 		rdat = (yield ssd.find_one({'sessionID':self.__id}))['data']
 		self.data = {}
 		for k in rdat.keys():
