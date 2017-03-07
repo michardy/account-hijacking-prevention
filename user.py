@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class User(db_int.Interface):
 	"""This class handles reading, writing, and manipulating user objects."""
-	def __init__(self, sid, site, db):
+	def __init__(self, uid, site, db):
 		self.__id_type = "uid"
 		self.__id = uid
 		self.__data_type= 'userData_site-'
