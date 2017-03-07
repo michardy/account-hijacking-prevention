@@ -10,7 +10,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 INVALID_USER = (404, 'Invalid user')
-INVALID_SESSION = (404, 'Invalid session'))
+INVALID_SESSION = (404, 'Invalid session')
 OK = (200, 'OK')
 
 class Receiver():
