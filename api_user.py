@@ -40,13 +40,13 @@ class Site(db_int.Interface):
 		self.__client_key = site['clientKey']
 		self.__server_key = site['serverKey']
 
-	def get_id(self)
+	def get_id(self):
 		"""Get site database ID"""
 		return(self.__id)
 
 	def get_salt(self, type):
 		"""Get sitewide salt for given data type"""
-		return(self.__salts[type])
+		return(base64.b64decode(self.__salts[type]))
 
 	def __combine(self):
 		"""Return dictionary reepresentation of class"""

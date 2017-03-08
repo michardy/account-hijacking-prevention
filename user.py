@@ -16,15 +16,20 @@ class User(db_int.Interface):
 		self.code = None #verification token
 		self.__site = str(site)
 		self.__db = db
+		super(User, self).__init__(db, self.__data_type, str(site),
+                        self.__id_type, uid, self.__combine)
 
 	@gen.coroutine
-	def read_db(self, site):
+	def read_db(self):
 		"""Reads user object from DB."""
-		sud = self.__db[self.__id_type + self.__site]
+		sud = self.__db[self.__data_type + self.__site]
 		user = yield sud.find_one({'uid':self.__id}) #Try to find user
 		if user is not None:
 			self.data = user['data']
-			self.code = user['code']
+			try:
+				self.code = user['code']
+			except KeyError:
+				pass
 
 	def add_data(self, data):
 		"""Adds data to user."""
