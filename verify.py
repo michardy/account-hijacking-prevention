@@ -2,7 +2,7 @@
 
 import smtplib
 import hashlib
-import mongo_int
+import user
 import os
 import base64
 from tornado import gen
@@ -12,9 +12,13 @@ def makeCode(uid, sid, site, db):
 	secret = base64.b32encode(os.urandom(10))
 	#email code
 	code = hashlib.sha512(secret + uid + sid + site)
-	mongo_int.setUserCode(code, uid, site, db)
+	member = user.User(uid, site, db)
+	yield memeber.read_db()
+	member.code = code
+	member.write_out()
 
 @gen.coroutine
 def valCode(secret, uid, sid, site, db):
-	hash = yield mongo_int.getUserCode(uid, site, db)
-	return(hash == hashlib.sha512(secret + uid + sid + site))
+	member = user.User(uid, site, db)
+	yield memeber.read_db()
+	return(member.code == hashlib.sha512(secret + uid + sid + site))

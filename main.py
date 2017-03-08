@@ -9,8 +9,7 @@ import json
 import logging
 import rec
 import config
-import client
-import mongo_int
+import api_user
 import verify
 from tornado import gen
 
@@ -35,10 +34,12 @@ class ApiGetTrust(tornado.web.RequestHandler):
 	def post(self):
 		db = self.settings['db']
 		payload = json.loads(self.request.body.decode('utf-8'))
-		site = yield mongo_int.get_site_by_server_key(payload['ak'], db)
-		if site:
+		site = api_user.Site(db)
+		yield site.get_by_server_key(payload['ak'])
+		site_id = site.get_id()
+		if site_id:
 			trust = (yield rec.rec.get_trust(payload['sid'],
-				payload['uid'], site, db))
+				payload['uid'], site_id, db))
 			self.set_status(trust[0])
 			self.write(trust[1])
 		else:
@@ -61,16 +62,20 @@ class ApiValUsr(tornado.web.RequestHandler):
 	def post(self):
 		db = self.settings['db']
 		payload = json.loads(self.request.body.decode('utf-8'))
-		site = yield mongo_int.get_site_by_server_key(payload['ak'], db)
-		verify.makeCode(uid, sid, site, db)
+		site = api_user.Site(db)
+		yield site.get_by_server_key(payload['ak'])
+		site_id = site.get_id()
+		verify.makeCode(uid, sid, site_id, db)
 		return('OK')
 
 class ApiValCode(tornado.web.RequestHandler):
 	"""Handels API call to validate confirmation code."""
 	def post(self):
 		db = self.settings['db']
-		site = yield mongo_int.get_site_by_client_key(self.get_argument('ck'),
-			self.request.headers.get('Host'), db)
+		site = api_client.Site(db)
+		yield site.get_by_client_key(self.get_argument('ck'),
+			self.request.headers.get('Host'))
+		site_id = site.get_id()
 		uid = self.get_argument('uid')
 		sid = self.get_argument('sid')
 		#code = yield mongo_int.getUserValCode(uid, site)
