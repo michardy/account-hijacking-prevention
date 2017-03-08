@@ -7,6 +7,7 @@ import db_int
 logger = logging.getLogger(__name__)
 
 class Site(db_int.Interface):
+	"""This class handles reading site attributes from the database."""
 	def __init__(self, db):
 		self.__salts = {}
 		self.__id_type = '_id'
