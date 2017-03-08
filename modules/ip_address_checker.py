@@ -1,7 +1,7 @@
 import bcrypt
 import rec
 import hashlib
-import mongo_int
+import api_user
 from tornado import gen
 
 import logging
@@ -9,9 +9,10 @@ logger = logging.getLogger(__name__)
 
 @gen.coroutine
 def hasher(data, key, headers, db):
-	salt = yield mongo_int.get_salt(key, headers.get('Host'), db,
-		'ip')
-	ip = headers.get('X-Real-IP')
+	site = api_user.Site(db)
+	yield site.get_by_client_key(key, headers.get('Host'))
+	salt = site.get_salt('ip')
+	ip = headers.get('User-Agent')
 	return(hashlib.sha512(ip.encode('utf-8') + salt).hexdigest())
 
 rec.rec.add_hasher('ip', hasher)
@@ -20,7 +21,7 @@ rec.rec.add_hasher('ip', hasher)
 def comparer(session, user, site, db):
 	try:
 		for h in user['ip']:
-			if bcrypt.hashpw(session['ip']['data'].encode('utf-8'), h) == h:
+			if bcrypt.hashpw(session['ip'].encode('utf-8'), h) == h:
 				return(True)
 		return(False)
 	except KeyError:
@@ -31,7 +32,7 @@ rec.rec.add_comparer('ip', comparer, 1)
 
 def translator(data):
 	salt = bcrypt.gensalt()
-	return(bcrypt.hashpw(data['data'].encode('utf-8'), salt))
+	return(bcrypt.hashpw(data.encode('utf-8'), salt))
 
 rec.rec.add_translator('ip', translator)
 
