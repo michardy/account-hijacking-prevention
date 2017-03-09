@@ -1,3 +1,5 @@
+import rec
+
 fxn = '''
 var keys = [];
 
@@ -21,3 +23,6 @@ function keyDyn(){
 	window.onkeyup = keyDynUUP(e)
 	//reg callback
 }
+'''
+
+rec.mods.add('fingerprint', fxn)
