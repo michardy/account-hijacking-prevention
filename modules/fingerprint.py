@@ -41,7 +41,7 @@ rec.rec.add_translator('fingerprint', translator)
 #JavaScript data collection function
 fxn = '''
 function fingerprint(){
-	var sr = window.screen.height.toString() + window.screen.width.toString() + window.screen.availHeight.toString() + window.screen.availWidth.toString();
+	var sr = window.screen.height.toString() + window.screen.width.toString() + window.screen.availHeight.toString() + window.screen.availWidth.toString() + navigator.hardwareConcurrency.toString();
 	return(['fingerprint', sr]);
 }
 '''
