@@ -1,6 +1,5 @@
 import bcrypt
 import rec
-import hashlib
 import api_user
 from tornado import gen
 
@@ -13,7 +12,7 @@ def hasher(data, key, headers, db):
 	site = api_user.Site(db)
 	yield site.get_by_client_key(key, headers.get('Host'))
 	salt = site.get_salt('fingerprint')
-	return(hashlib.sha512(data.encode('utf-8') + salt).hexdigest())
+	return(bcrypt.hashpw(data.encode('utf-8'), salt))
 
 rec.rec.add_hasher('fingerprint', hasher)
 

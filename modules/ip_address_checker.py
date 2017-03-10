@@ -1,6 +1,5 @@
 import bcrypt
 import rec
-import hashlib
 import api_user
 from tornado import gen
 
@@ -14,7 +13,7 @@ def hasher(data, key, headers, db):
 	yield site.get_by_client_key(key, headers.get('Host'))
 	salt = site.get_salt('ip')
 	ip = headers.get('X-Real-IP')
-	return(hashlib.sha512(ip.encode('utf-8') + salt).hexdigest())
+	return(bcrypt.hashpw(ip.encode('utf-8'), salt))
 
 rec.rec.add_hasher('ip', hasher) #register the previous function
 

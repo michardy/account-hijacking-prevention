@@ -1,4 +1,3 @@
-import base64
 import logging
 from tornado import gen
 
@@ -47,7 +46,7 @@ class Site(db_int.Interface):
 
 	def get_salt(self, type):
 		"""Get sitewide salt for given data type"""
-		return(base64.b64decode(self.__salts[type]))
+		return(self.__salts[type])
 
 	def __combine(self):
 		"""Return dictionary reepresentation of class"""
