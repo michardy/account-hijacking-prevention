@@ -98,8 +98,9 @@ class Receiver():
 		actmax = 0
 		for i in self.__comparers.keys():
 			actmax += self.__maxscores[i]
-			total += yield self.__comparers[i](ses.data, member.data,
-				site, db)
+			for h in member.data[i]: #loop through all the user's hashed data of this type and compare it to the session
+				total += yield self.__comparers[i](ses.data[i].encode('utf-8'),
+					h, site, db)
 		try:
 			return(200, str(total/actmax))
 		except ZeroDivisionError:
