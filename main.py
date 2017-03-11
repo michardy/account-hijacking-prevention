@@ -17,15 +17,6 @@ from tornado import gen
 
 logger = logging.getLogger()
 
-class BaseRequestHandler(tornado.web.RequestHandler):
-	"""Customized base request handler others that need error customization can inherit from."""
-	@gen.coroutine
-	def write_error(self, status_code, **kwargs):
-		"""Override the default error handler catch 500 errors that should be 404 or 401 errors."""
-		self.set_status(status_code)
-		self.write(self._reason)
-		self.write(str(kwargs['exc_info']))
-
 class ApiSubmitData(tornado.web.RequestHandler):
 	"""Receives data submitted by collect.js and send.js"""
 	@gen.coroutine
@@ -39,7 +30,7 @@ class ApiSubmitData(tornado.web.RequestHandler):
 		self.set_status(out[0])
 		self.write(out[1])
 
-class ApiGetTrust(BaseRequestHandler):
+class ApiGetTrust(tornado.web.RequestHandler):
 	"""Handles API call to calculate user trust score."""
 	@gen.coroutine
 	def post(self):
@@ -53,7 +44,6 @@ class ApiGetTrust(BaseRequestHandler):
 			yield member.read_db()
 			ses = session.Session(payload['sid'], site, db)
 			yield ses.read_db()
-			print(ses.data)
 			trust = (yield rec.rec.get_trust(ses.data,
 				member.data, site_id, db))
 			self.set_status(trust[0])
@@ -75,7 +65,8 @@ class ApiRegisterUser(tornado.web.RequestHandler):
 		ses = session.Session(payload['sid'], site_id, db)
 		yield ses.read_db()
 		if ses.data.keys():
-			out = yield rec.rec.copy_data(ses.data, uid, site_id, db)
+			out = yield rec.rec.copy_data(ses.data, payload['uid'],
+				site_id, db)
 			self.set_status(out[0])
 			self.write(out[1])
 		else:

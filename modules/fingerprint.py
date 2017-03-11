@@ -26,7 +26,7 @@ rec.rec.add_comparer('fingerprint', comparer, 1)
 def translator(data):
 	"""This provides a function that hashes the fingerprint a second time with a per user hash."""
 	salt = bcrypt.gensalt()
-	return(bcrypt.hashpw(data.encode('utf-8'), salt))
+	return(bcrypt.hashpw(data, salt))
 
 rec.rec.add_translator('fingerprint', translator)
 

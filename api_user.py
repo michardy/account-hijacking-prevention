@@ -46,7 +46,7 @@ class Site(db_int.Interface):
 
 	def get_salt(self, type):
 		"""Get sitewide salt for given data type"""
-		return(self.__salts[type])
+		return(self.__salts[type].encode('ascii'))
 
 	def __combine(self):
 		"""Return dictionary reepresentation of class"""

@@ -11,8 +11,6 @@ from tornado import gen
 import logging
 logger = logging.getLogger(__name__)
 
-INVALID_USER = (404, 'Invalid user')
-INVALID_SESSION = (404, 'Invalid session')
 OK = (200, 'OK')
 
 class Receiver():
@@ -74,21 +72,11 @@ class Receiver():
 		"""This scores how trustworthy a user is as a number between 1 and zero.  
 		The score is based on how much session data matches the data stored in their user profile
 		"""
-		'''try:
-			member = user.User(uid, site, db)
-			yield member.read_db()
-		except TypeError:
-			return(INVALID_USER)
-		try:
-			ses = session.Session(sid, site, db)
-			yield ses.read_db()
-		except TypeError:
-			return(INVALID_SESSION)'''
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():
 			actmax += self.__maxscores[i]
-			if i in mdat:
+			if i in mdat and i in sdat:
 				for h in mdat[i]: #loop through all the user's hashed data of this type and compare it to the session
 					total += yield self.__comparers[i](sdat[i].encode('utf-8'),
 						h, site, db)
