@@ -40,9 +40,9 @@ class ApiGetTrust(tornado.web.RequestHandler):
 		yield site.get_by_server_key(payload['ak'])
 		site_id = site.get_id()
 		if site_id:
-			member = user.User(payload['uid'], site, db)
+			member = user.User(payload['uid'], site_id, db)
 			yield member.read_db()
-			ses = session.Session(payload['sid'], site, db)
+			ses = session.Session(payload['sid'], site_id, db)
 			yield ses.read_db()
 			trust = (yield rec.rec.get_trust(ses.data,
 				member.data, site_id, db))
