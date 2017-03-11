@@ -19,13 +19,7 @@ rec.rec.add_hasher('fingerprint', hasher)
 @gen.coroutine
 def comparer(ses_hash, usr_hash, site, db):
 	"""This provides a function to compare initially hashed fingerprints with doubly hashed stored fingerprints."""
-	try:
-		if bcrypt.hashpw(ses_hash, usr_hash) == usr_hash:
-			return(True)
-		return(False)
-	except KeyError:
-		logger.error('User session data expired')
-		return(0)
+	return(bcrypt.hashpw(ses_hash, usr_hash) == usr_hash)
 
 rec.rec.add_comparer('fingerprint', comparer, 1)
 

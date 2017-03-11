@@ -19,13 +19,7 @@ rec.rec.add_hasher('ip', hasher) #register the previous function
 
 def comparer(ses_hash, usr_hash, site, db):
 	"""This function provides a means of comparing per user hashed IP addresses with session address hashes."""
-	try:
-		if bcrypt.hashpw(ses_hash, usr_hash) == usr_hash:
-			return(True)
-		return(False)
-	except KeyError:
-		logger.error('User session data expired')
-		return(0)
+	return(bcrypt.hashpw(ses_hash, usr_hash) == usr_hash)
 
 rec.rec.add_comparer('ip', comparer, 1) #register the previous function
 
