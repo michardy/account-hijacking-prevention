@@ -10,10 +10,21 @@ import logging
 import rec
 import config
 import api_user
+import user
+import session
 import verify
 from tornado import gen
 
 logger = logging.getLogger()
+
+class BaseRequestHandler(tornado.web.RequestHandler):
+	"""Customized base request handler others that need error customization can inherit from."""
+	@gen.coroutine
+	def write_error(self, status_code, **kwargs):
+		"""Override the default error handler catch 500 errors that should be 404 or 401 errors."""
+		self.set_status(status_code)
+		self.write(self._reason)
+		self.write(str(kwargs['exc_info']))
 
 class ApiSubmitData(tornado.web.RequestHandler):
 	"""Receives data submitted by collect.js and send.js"""
@@ -28,7 +39,7 @@ class ApiSubmitData(tornado.web.RequestHandler):
 		self.set_status(out[0])
 		self.write(out[1])
 
-class ApiGetTrust(tornado.web.RequestHandler):
+class ApiGetTrust(BaseRequestHandler):
 	"""Handles API call to calculate user trust score."""
 	@gen.coroutine
 	def post(self):
@@ -38,8 +49,13 @@ class ApiGetTrust(tornado.web.RequestHandler):
 		yield site.get_by_server_key(payload['ak'])
 		site_id = site.get_id()
 		if site_id:
-			trust = (yield rec.rec.get_trust(payload['sid'],
-				payload['uid'], site_id, db))
+			member = user.User(payload['uid'], site, db)
+			yield member.read_db()
+			ses = session.Session(payload['sid'], site, db)
+			yield ses.read_db()
+			print(ses.data)
+			trust = (yield rec.rec.get_trust(ses.data,
+				member.data, site_id, db))
 			self.set_status(trust[0])
 			self.write(trust[1])
 		else:
@@ -53,9 +69,18 @@ class ApiRegisterUser(tornado.web.RequestHandler):
 	def post(self):
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		out = yield rec.rec.copy_data(payload, db)
-		self.set_status(out[0])
-		self.write(out[1])
+		site = api_user.Site(db)
+		yield site.get_by_server_key(payload['ak'])
+		site_id = site.get_id()
+		ses = session.Session(payload['sid'], site_id, db)
+		yield ses.read_db()
+		if ses.data.keys():
+			out = yield rec.rec.copy_data(ses.data, uid, site_id, db)
+			self.set_status(out[0])
+			self.write(out[1])
+		else:
+			self.set_status(404)
+			self.write('Invalid Session')
 
 class ApiValUsr(tornado.web.RequestHandler):
 	"""Handles API call to send a confirmation code by email."""

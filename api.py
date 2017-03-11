@@ -58,33 +58,23 @@ class Receiver():
 			return(400, 'Err: Could not find a handler for "' + req['name'] + '"')
 
 	@gen.coroutine
-	def copy_data(self, req, db):
+	def copy_data(self, ses, uid, site_id, db):
 		"""This function is called to store session data permenantly to the user profile"""
-		sid = req['sid']
-		uid = req['uid']
-		site = api_user.Site(db)
-		yield site.get_by_server_key(req['ak'])
-		site_id = site.get_id()
-		ses = session.Session(sid, site_id, db)
-		yield ses.read_db()
-		if ses.data.keys():
-			data = {}
-			for dt in ses.data.keys():
-				data[dt] = self.__translators[dt](ses.data[dt])
-			member = user.User(uid, site_id, db)
-			yield member.read_db()
-			member.add_data(data)
-			yield member.write_out()
-			return(OK)
-		else:
-			return(INVALID_SESSION)
+		data = {}
+		for dt in ses.keys():
+			data[dt] = self.__translators[dt](ses[dt])
+		member = user.User(uid, site_id, db)
+		yield member.read_db()
+		member.add_data(data)
+		yield member.write_out()
+		return(OK)
 
 	@gen.coroutine
-	def get_trust(self, sid, uid, site, db):
+	def get_trust(self, sdat, mdat, site, db):
 		"""This scores how trustworthy a user is as a number between 1 and zero.  
 		The score is based on how much session data matches the data stored in their user profile
 		"""
-		try:
+		'''try:
 			member = user.User(uid, site, db)
 			yield member.read_db()
 		except TypeError:
@@ -93,14 +83,15 @@ class Receiver():
 			ses = session.Session(sid, site, db)
 			yield ses.read_db()
 		except TypeError:
-			return(INVALID_SESSION)
+			return(INVALID_SESSION)'''
 		total = 0
 		actmax = 0
 		for i in self.__comparers.keys():
 			actmax += self.__maxscores[i]
-			for h in member.data[i]: #loop through all the user's hashed data of this type and compare it to the session
-				total += yield self.__comparers[i](ses.data[i].encode('utf-8'),
-					h, site, db)
+			if i in mdat:
+				for h in mdat[i]: #loop through all the user's hashed data of this type and compare it to the session
+					total += yield self.__comparers[i](sdat[i].encode('utf-8'),
+						h, site, db)
 		try:
 			return(200, str(total/actmax))
 		except ZeroDivisionError:
