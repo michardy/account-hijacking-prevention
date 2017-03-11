@@ -85,7 +85,7 @@ class ApiValUsr(tornado.web.RequestHandler):
 		return('OK')
 
 class ApiValCode(tornado.web.RequestHandler):
-	"""Handels API call to validate confirmation code."""
+	"""Handles API call to validate confirmation code."""
 	def post(self):
 		db = self.settings['db']
 		site = api_client.Site(db)
