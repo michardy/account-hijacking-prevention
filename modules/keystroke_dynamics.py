@@ -7,6 +7,7 @@ function keyDynCB(){
 	//copy var
 	//clear var
 	//loop through and average
+	//Alphabetize to prevent unintended keylogging
 	//reschedule
 }
 
@@ -25,4 +26,4 @@ function keyDyn(){
 }
 '''
 
-rec.mods.add('fingerprint', fxn)
+rec.mods.add('keystroke_dynamics', fxn)
