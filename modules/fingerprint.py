@@ -17,7 +17,7 @@ def hasher(data, key, headers, db):
 rec.rec.add_hasher('fingerprint', hasher)
 
 @gen.coroutine
-def comparer(ses_hash, usr_hash, site, db):
+def comparer(ses_hash, usr_hash):
 	"""This provides a function to compare initially hashed fingerprints with doubly hashed stored fingerprints."""
 	return(bcrypt.hashpw(ses_hash, usr_hash) == usr_hash)
 

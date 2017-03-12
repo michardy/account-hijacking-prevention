@@ -68,18 +68,29 @@ class Receiver():
 		return(OK)
 
 	@gen.coroutine
+	def __calculate_sub_rating(self, data_type, sdat, mdat):
+		"""Calculate trust score for specific subtype of user data"""
+		sub_tot = 0
+		if data_type in mdat and data_type in sdat:
+			for h in mdat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
+				sub_tot += (yield self.__comparers[data_type](
+					sdat[data_type], h))
+		elif data_type not in sdat:
+			sub_tot = -1*self.__maxscores[data_type]
+		return(sub_tot)
+
+	@gen.coroutine
 	def get_trust(self, sdat, mdat, site, db):
-		"""This scores how trustworthy a user is as a number between 1 and zero.  
-		The score is based on how much session data matches the data stored in their user profile
+		"""This scores how trustworthy a user is as a number between -1 and 1.
+		The score is based on how much session data matches the data stored in their user profile.
+		A score of 1 means that the user is prefeclty trustworthy, a score of 0 means they cannot be trusted.
+		A negative score means that the users data has expired and an accurate determination cannot be made.
 		"""
 		total = 0
 		actmax = 0
-		for i in self.__comparers.keys():
-			actmax += self.__maxscores[i]
-			if i in mdat and i in sdat:
-				for h in mdat[i]: #loop through all the user's hashed data of this type and compare it to the session
-					total += (yield self.__comparers[i](sdat[i],
-						h, site, db))
+		for dt in self.__comparers.keys():
+			actmax += self.__maxscores[dt]
+			total += yield self.__calculate_sub_rating(dt, sdat, mdat)
 		try:
 			return(200, str(total/actmax))
 		except ZeroDivisionError:
