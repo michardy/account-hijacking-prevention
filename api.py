@@ -11,8 +11,6 @@ from tornado import gen
 import logging
 logger = logging.getLogger(__name__)
 
-INVALID_USER = (404, 'Invalid user')
-INVALID_SESSION = (404, 'Invalid session')
 OK = (200, 'OK')
 
 class Receiver():
@@ -58,49 +56,41 @@ class Receiver():
 			return(400, 'Err: Could not find a handler for "' + req['name'] + '"')
 
 	@gen.coroutine
-	def copy_data(self, req, db):
+	def copy_data(self, ses, uid, site_id, db):
 		"""This function is called to store session data permenantly to the user profile"""
-		sid = req['sid']
-		uid = req['uid']
-		site = api_user.Site(db)
-		yield site.get_by_server_key(req['ak'])
-		site_id = site.get_id()
-		ses = session.Session(sid, site_id, db)
-		yield ses.read_db()
-		if ses.data.keys():
-			data = {}
-			for dt in ses.data.keys():
-				data[dt] = self.__translators[dt](ses.data[dt])
-			member = user.User(uid, site_id, db)
-			yield member.read_db()
-			member.add_data(data)
-			yield member.write_out()
-			return(OK)
-		else:
-			return(INVALID_SESSION)
+		data = {}
+		for dt in ses.keys():
+			data[dt] = self.__translators[dt](ses[dt])
+		member = user.User(uid, site_id, db)
+		yield member.read_db()
+		member.add_data(data)
+		yield member.write_out()
+		return(OK)
 
 	@gen.coroutine
-	def get_trust(self, sid, uid, site, db):
-		"""This scores how trustworthy a user is as a number between 1 and zero.  
-		The score is based on how much session data matches the data stored in their user profile
+	def __calculate_sub_rating(self, data_type, sdat, mdat):
+		"""Calculate trust score for specific subtype of user data"""
+		sub_tot = 0
+		if data_type in mdat and data_type in sdat:
+			for h in mdat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
+				sub_tot += (yield self.__comparers[data_type](
+					sdat[data_type], h))
+		elif data_type not in sdat:
+			sub_tot = -1*self.__maxscores[data_type]
+		return(sub_tot)
+
+	@gen.coroutine
+	def get_trust(self, sdat, mdat, site, db):
+		"""This scores how trustworthy a user is as a number between -1 and 1.
+		The score is based on how much session data matches the data stored in their user profile.
+		A score of 1 means that the user is prefeclty trustworthy, a score of 0 means they cannot be trusted.
+		A negative score means that the users data has expired and an accurate determination cannot be made.
 		"""
-		try:
-			member = user.User(uid, site, db)
-			yield member.read_db()
-		except TypeError:
-			return(INVALID_USER)
-		try:
-			ses = session.Session(sid, site, db)
-			yield ses.read_db()
-		except TypeError:
-			return(INVALID_SESSION)
 		total = 0
 		actmax = 0
-		for i in self.__comparers.keys():
-			actmax += self.__maxscores[i]
-			for h in member.data[i]: #loop through all the user's hashed data of this type and compare it to the session
-				total += yield self.__comparers[i](ses.data[i].encode('utf-8'),
-					h, site, db)
+		for dt in self.__comparers.keys():
+			actmax += self.__maxscores[dt]
+			total += yield self.__calculate_sub_rating(dt, sdat, mdat)
 		try:
 			return(200, str(total/actmax))
 		except ZeroDivisionError:

@@ -10,6 +10,8 @@ import logging
 import rec
 import config
 import api_user
+import user
+import session
 import verify
 from tornado import gen
 
@@ -38,8 +40,12 @@ class ApiGetTrust(tornado.web.RequestHandler):
 		yield site.get_by_server_key(payload['ak'])
 		site_id = site.get_id()
 		if site_id:
-			trust = (yield rec.rec.get_trust(payload['sid'],
-				payload['uid'], site_id, db))
+			member = user.User(payload['uid'], site_id, db)
+			yield member.read_db()
+			ses = session.Session(payload['sid'], site_id, db)
+			yield ses.read_db()
+			trust = (yield rec.rec.get_trust(ses.data,
+				member.data, site_id, db))
 			self.set_status(trust[0])
 			self.write(trust[1])
 		else:
@@ -53,9 +59,19 @@ class ApiRegisterUser(tornado.web.RequestHandler):
 	def post(self):
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
-		out = yield rec.rec.copy_data(payload, db)
-		self.set_status(out[0])
-		self.write(out[1])
+		site = api_user.Site(db)
+		yield site.get_by_server_key(payload['ak'])
+		site_id = site.get_id()
+		ses = session.Session(payload['sid'], site_id, db)
+		yield ses.read_db()
+		if ses.data.keys():
+			out = yield rec.rec.copy_data(ses.data, payload['uid'],
+				site_id, db)
+			self.set_status(out[0])
+			self.write(out[1])
+		else:
+			self.set_status(404)
+			self.write('Invalid Session')
 
 class ApiValUsr(tornado.web.RequestHandler):
 	"""Handles API call to send a confirmation code by email."""
@@ -69,7 +85,7 @@ class ApiValUsr(tornado.web.RequestHandler):
 		return('OK')
 
 class ApiValCode(tornado.web.RequestHandler):
-	"""Handels API call to validate confirmation code."""
+	"""Handles API call to validate confirmation code."""
 	def post(self):
 		db = self.settings['db']
 		site = api_client.Site(db)
