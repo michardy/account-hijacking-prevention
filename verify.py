@@ -18,13 +18,13 @@ def makeCode(uid, sid, site, key, db):
 	code = f.encrypt(secret + uid + sid + site)
 	member = user.User(uid, site, db)
 	yield memeber.read_db()
-	member.code = code
+	member.code = secret
 	member.write_out()
 
 @gen.coroutine
-def valCode(secret, uid, sid, site, db):
+def valCode(code, uid, sid, site, key, db):
 	"""Check the varification code."""
 	member = user.User(uid, site, db)
 	yield memeber.read_db()
 	f = Fernet(key)
-	return(member.code == hashlib.sha512(secret + uid + sid + site))
+	return(f.decrypt(code, 3600) == member.code + uid + sid + site)
