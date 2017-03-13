@@ -1,11 +1,10 @@
-# This script compares user data
-# it is also called to intialize modules that hash and compare data
+# The primary purpose of this module is to run data hashing and comparison functions
+# It is also called during the intialization of modules to register their hashing and comparison functions.
 
 import user
 import session
 import api_user
 
-import tornado.ioloop
 from tornado import gen
 
 import logging
@@ -14,12 +13,21 @@ logger = logging.getLogger(__name__)
 OK = (200, 'OK')
 
 class Receiver():
-	"""The API request receiver class"""
+	"""This class handles all requests to hash and interpret data.
+	Most of the shared functionalty that underpins the API is defined here.
+	Functions in here fall into two catagories:
+		Functions that allow modules to register hashers or comparers.
+		Functions that run the registered hashers or comparers.
+	Please note:
+		If a function you are considering including in this file does not invoke a hasher, translator, or comparer it may not belong in this file.
+	"""
 	def __init__(self):
 		self.__hashers = {}
 		self.__translators = {}
 		self.__comparers = {}
 		self.__maxscores = {}
+
+	# Module registration functions
 
 	def add_hasher(self, name, fxn):
 		"""This is called by each module on startup to register its sitewide hasher."""
@@ -27,7 +35,7 @@ class Receiver():
 
 	def add_translator(self, name, fxn):
 		"""This is called by each module on startup to register its data translator.
-		Translators hash data with a per user salt and hash.
+		Translators hash data, which has already been hashed by a (sitewide) hasher, with a per user salt.
 		"""
 		self.__translators[name] = fxn
 
@@ -36,9 +44,11 @@ class Receiver():
 		self.__comparers[name] = fxn
 		self.__maxscores[name] = score
 
+	# Module users and API interface
+
 	@gen.coroutine
 	def add_data(self, req, headers, db):
-		"""This function is called when data is received to store data"""
+		"""This function is called when data is received from a browser to hash and store the data"""
 		if req['name'] in self.__comparers.keys():
 			hash = yield self.__hashers[req['name']](req['data'],
 				req['ck'], headers, db)
@@ -83,7 +93,7 @@ class Receiver():
 	def get_trust(self, sdat, mdat, site, db):
 		"""This scores how trustworthy a user is as a number between -1 and 1.
 		The score is based on how much session data matches the data stored in their user profile.
-		A score of 1 means that the user is prefeclty trustworthy, a score of 0 means they cannot be trusted.
+		A score of 1 means that the user is perfectly trustworthy, a score of 0 means they cannot be trusted.
 		A negative score means that the users data has expired and an accurate determination cannot be made.
 		"""
 		total = 0
