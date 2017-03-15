@@ -26,4 +26,3 @@ function keyDyn(){
 '''
 
 rec.mods.add('fingerprint', fxn)
-rec.mods.set_async(True)
