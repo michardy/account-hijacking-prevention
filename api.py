@@ -45,12 +45,6 @@ class Receiver():
 		self.__comparers[name] = fxn
 		self.__maxscores[name] = score
 
-	def set_async(is_enabled):
-		"""This is called to set whether the function has its own (asynchronous) submit function.
-		Is this function a shortcut I will come to regret? Yes, I am already regreting this function.  
-		"""
-		self.__async = is_enabled
-
 	# Module users and API interface
 
 	@gen.coroutine
