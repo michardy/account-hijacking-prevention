@@ -26,6 +26,7 @@ class Receiver():
 		self.__translators = {}
 		self.__comparers = {}
 		self.__maxscores = {}
+		self.__async = {}
 
 	# Module registration functions
 
@@ -43,6 +44,12 @@ class Receiver():
 		"""This is called by each module on startup to register its hash comparer."""
 		self.__comparers[name] = fxn
 		self.__maxscores[name] = score
+
+	def set_async(is_enabled):
+		"""This is called to set whether the function has its own (asynchronous) submit function.
+		Is this function a shortcut I will come to regret? Yes, I am already regreting this function.  
+		"""
+		self.__async = is_enabled
 
 	# Module users and API interface
 
