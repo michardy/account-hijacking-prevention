@@ -40,3 +40,4 @@ function ip(){
 '''
 
 rec.mods.add('ip', fxn)
+rec.mods.set_async(False)
