@@ -3,6 +3,7 @@
 {% end %}
 
 var collectors = {% raw col_list %};
+var async = {%raw async_list%}
 
 function collect(){
 	for (var c = 0; c < collectors.length; c++){

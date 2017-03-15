@@ -26,5 +26,4 @@ function keyDyn(){
 }
 '''
 
-rec.mods.add('keystroke_dynamics', fxn)
-rec.mods.set_async(True)
+rec.mods.add('keystroke_dynamics', fxn, True)
