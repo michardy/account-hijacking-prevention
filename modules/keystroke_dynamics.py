@@ -1,28 +1,54 @@
 import rec
 
 fxn = '''
-var keys = [];
+var keyDynKeys = [];
+
+function keyDynAverage(arr){
+	var tot = 0;
+	for (var n = 0; n < arr.length; n++){
+		tot += arr[n];
+	}
+	return(tot/arr.length);
+}
 
 function keyDynCB(){
-	//copy var
-	//clear var
-	//loop through and average
+	//sort & calculate diffs
+	var measurements = {};
+	for (var i = 0; i < keyDynKeys.length; i++){
+		if (keyDynKeys[i].length !== 1){
+			if (keyDynKeys[i][0][0]+','+keyDynKeys[i][1][0] in measurements){
+				measurements[keyDynKeys[i][0][0]+','+keyDynKeys[i][1][0]].push(keyDynKeys[i][1][1]-keyDynKeys[i][0][1]);
+			} else {
+				measurements[keyDynKeys[i][0][0]+','+keyDynKeys[i][1][0]] = [keyDynKeys[i][1][1]-keyDynKeys[i][0][1]];
+			}
+		}
+	}
+	keyDynKeys = [];
+	// average the diffs (& remove outliers?)
+	var diffs = {};
+	for (kc in measurements) {
+		diffs[kc] = keyDynAverage(measurements[kc]);
+	}
+	console.log(diffs);
 	//Alphabetize to prevent unintended keylogging
-	//reschedule
 }
 
 function keyDynUP(e){
-	keys.push([[e.keyCode, Date.now()]])
+	keyDynKeys.push([[e.keyCode, Date.now()]])
+	if (keyDynKeys.length > 100){
+		keyDynCB();
+	}
 }
 
 function keyDynDW(e){
-	keys[keys.length()-1].push([e.keyCode, Date.now()])
+	if (keyDynKeys.length !== 0){
+		keyDynKeys[keyDynKeys.length-1].push([e.keyCode, Date.now()]);
+	}
 }
 
-function keyDyn(){
-	window.onkeydown = keyDynDW(e)
-	window.onkeyup = keyDynUUP(e)
-	//reg callback
+function keystroke_dynamics(){
+	window.onkeydown = keyDynDW;
+	window.onkeyup = keyDynUP;
 }
 '''
 
