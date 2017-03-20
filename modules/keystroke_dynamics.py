@@ -16,21 +16,21 @@ function keyDynCB(){
 	var measurements = {};
 	for (var i = 0; i < keyDynKeys.length; i++){
 		if (keyDynKeys[i].length !== 1){
-			if (keyDynKeys[i][0][0]+','+keyDynKeys[i][1][0] in measurements){
-				measurements[keyDynKeys[i][0][0]+','+keyDynKeys[i][1][0]].push(keyDynKeys[i][1][1]-keyDynKeys[i][0][1]);
+			if (keyDynKeys[i][0][0]+'.'+keyDynKeys[i][1][0] in measurements){
+				measurements[keyDynKeys[i][0][0]+'.'+keyDynKeys[i][1][0]].push(keyDynKeys[i][1][1]-keyDynKeys[i][0][1]);
 			} else {
-				measurements[keyDynKeys[i][0][0]+','+keyDynKeys[i][1][0]] = [keyDynKeys[i][1][1]-keyDynKeys[i][0][1]];
+				measurements[keyDynKeys[i][0][0]+'.'+keyDynKeys[i][1][0]] = [keyDynKeys[i][1][1]-keyDynKeys[i][0][1]];
 			}
 		}
 	}
 	keyDynKeys = [];
-	// average the diffs (& remove outliers?)
+	// average the diffs, alphabetize, (& remove outliers?)
 	var diffs = {};
-	for (kc in measurements) {
+	for (var i = 0; i < Object.keys(measurements).length; i++){
+		var kc = Object.keys(measurements).sort()[i];
 		diffs[kc] = keyDynAverage(measurements[kc]);
 	}
 	console.log(diffs);
-	//Alphabetize to prevent unintended keylogging
 }
 
 function keyDynUP(e){
