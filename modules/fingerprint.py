@@ -1,33 +1,36 @@
 import bcrypt
 import rec
-import hashlib
-import mongo_int
+import api_user
 from tornado import gen
 
-@gen.coroutine
-def hasher(data, key, ref, db):
-	salt = yield mongo_int.getSalt(key, ref, db, 'fingerprint')
-	return(hashlib.sha512(data.encode('utf-8') + salt.encode('utf-8')).hexdigest())
-
-rec.rec.addHasher('fingerprint', hasher)
+import logging
+logger = logging.getLogger(__name__)
 
 @gen.coroutine
-def comparer(sid, uid, site, db):
-	session = yield mongo_int.getSession(sid, site, db)
-	user = yield mongo_int.getUserDat(uid, site, db)	
-	return(bcrypt.hashpw(session['fingerprint']['data'].encode('utf-8'), user['fingerprint'][0]) == user['ip'][0])
+def hasher(data, key, headers, salt):
+	"""This function provides an initial hasher for browser fingerprints that uses a sitewide salt."""
+	return(bcrypt.hashpw(data.encode('utf-8'), salt))
 
-rec.rec.addComparer('fingerprint', comparer, 1)
+rec.rec.add_hasher('fingerprint', hasher)
+
+@gen.coroutine
+def comparer(ses_hash, usr_hash):
+	"""This provides a function to compare initially hashed fingerprints with doubly hashed stored fingerprints."""
+	return(bcrypt.hashpw(ses_hash, usr_hash) == usr_hash)
+
+rec.rec.add_comparer('fingerprint', comparer, 1)
 
 def translator(data):
+	"""This provides a function that hashes the fingerprint a second time with a per user hash."""
 	salt = bcrypt.gensalt()
-	return(bcrypt.hashpw(data['data'].encode('utf-8'), salt))
+	return(bcrypt.hashpw(data, salt))
 
-rec.rec.addTranslator('fingerprint', translator)
+rec.rec.add_translator('fingerprint', translator)
 
+#JavaScript data collection function
 fxn = '''
 function fingerprint(){
-	var sr = window.screen.height.toString() + window.screen.width.toString() + window.screen.availHeight.toString() + window.screen.availWidth.toString();
+	var sr = window.screen.height.toString() + window.screen.width.toString() + window.screen.availHeight.toString() + window.screen.availWidth.toString() + navigator.hardwareConcurrency.toString();
 	return(['fingerprint', sr]);
 }
 '''

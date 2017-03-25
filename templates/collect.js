@@ -2,7 +2,7 @@
 {% raw c %}
 {% end %}
 
-var collectors = {% raw colList %};
+var collectors = {% raw col_list %};
 
 function collect(){
 	for (var c = 0; c < collectors.length; c++){
