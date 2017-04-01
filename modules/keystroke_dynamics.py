@@ -1,6 +1,7 @@
 import bcrypt
 import rec
 from tornado import gen
+#from cryptography.fernet import Fernet
 
 def reformat(key):
 	"""Re-formats database keys to make MongoDB stop complaining they contain periods"""
@@ -11,9 +12,9 @@ def hasher(data, key, headers, salt):
 	"""This function provides an initial hasher for collected keyboard flight times."""
 	hashed = {}
 	for k in data.keys():
-		#I know I am a terrible person for using the same salt on all of these.  So I promise I will stop
-		hashed[reformat(k)] = bcrypt.hashpw(str(int(data[k]) % 10).encode('utf-8'), salt)
-		#only once this feature is implemented
+		#I know I am a terrible person for not hashing
+		hashed[reformat(k)] = data[k]
+		#But I am not sure how to hash the data so that I can do math with it later
 		#issue: security
 	return(hashed)
 
@@ -23,20 +24,30 @@ rec.rec.add_hasher('keystroke_dynamics', hasher)
 def comparer(ses_hash, usr_hash):
 	"""This provides a function to compare initially hashed flight times with doubly hashed stored flight times."""
 	total = 0
+	kmax = 0
 	for k in usr_hash.keys():
 		if k in ses_hash:
-			total += (bcrypt.hashpw(ses_hash[k], usr_hash[k]) == usr_hash)
-	return(total)
+			kmax += 1
+			total += (abs(int(ses_hash[k]) - int(usr_hash[k])) - 24)
+	score = 4 - (total/kmax) #5 ms minus average deviation off normal
+	print(score)
+	if score > 5:
+		score = 1
+	elif score < 0:
+		score = 0
+	else:
+		score = abs(score)/4
+	return(score)
 
 rec.rec.add_comparer('keystroke_dynamics', comparer, 1)
 
 def translator(data):
 	"""This provides a function that hashes the flight times a second time with a per user hash."""
-	salt = bcrypt.gensalt()
-	hashed = {}
-	for k in data.keys(): #salt reuse
-		hashed[k] = bcrypt.hashpw(data[k], salt) #issue: security
-	retunr(hashed)
+	#hashed = {}
+	#for k in data.keys(): #no hashing
+		#maybe encrypt db keys to anonymize data
+		#hashed[k] = data[k] #issue: security
+	return(data)
 
 rec.rec.add_translator('keystroke_dynamics', translator)
 
@@ -46,8 +57,12 @@ var keyDynKeys = [];
 
 function keyDynAverage(arr){
 	var tot = 0;
+	var valPoints = 0;
 	for (var n = 0; n < arr.length; n++){
-		tot += arr[n];
+		if (arr[n] < 100){
+			valPoints += 1;
+			tot += arr[n];
+		}
 	}
 	return(tot/arr.length);
 }
