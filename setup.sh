@@ -7,4 +7,4 @@ sudo apt-get install mongodb
 virtualenv venv -p python3
 source venv/bin/activate
 pip install --upgrade pip
-pip install requirements.txt
+pip install -r requirements.txt

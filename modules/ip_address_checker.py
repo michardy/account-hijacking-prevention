@@ -7,11 +7,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 @gen.coroutine
-def hasher(data, key, headers, db):
+def hasher(data, key, headers, salt):
 	"""This function provides a hasher for received IP adresses that hashes with an intial sitewide salt."""
-	site = api_user.Site(db)
-	yield site.get_by_client_key(key, headers.get('Host'))
-	salt = site.get_salt('ip')
 	ip = headers.get('X-Real-IP')
 	return(bcrypt.hashpw(ip.encode('utf-8'), salt))
 
