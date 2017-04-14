@@ -29,9 +29,9 @@ def comparer(ses_hash, usr_hash):
 		if k in ses_hash:
 			kmax += 1
 			total += (abs(int(ses_hash[k]) - int(usr_hash[k])) - 24)
-	score = 4 - (total/kmax) #5 ms minus average deviation off normal
+	score = 4 - (total/kmax) #4 ms minus average deviation off normal
 	print(score)
-	if score > 5:
+	if score > 4:
 		score = 1
 	elif score < 0:
 		score = 0
