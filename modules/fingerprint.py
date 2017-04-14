@@ -35,4 +35,4 @@ function fingerprint(){
 }
 '''
 
-rec.mods.add('fingerprint', fxn)
+rec.mods.add('fingerprint', fxn, False)
