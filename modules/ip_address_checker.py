@@ -1,6 +1,5 @@
 import bcrypt
-import rec
-import api_user
+import hijackingprevention.rec as rec
 from tornado import gen
 
 import logging

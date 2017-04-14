@@ -1,5 +1,5 @@
 import bcrypt
-import rec
+import hijackingprevention.rec as rec
 from tornado import gen
 #from cryptography.fernet import Fernet
 
@@ -30,7 +30,6 @@ def comparer(ses_hash, usr_hash):
 			kmax += 1
 			total += (abs(int(ses_hash[k]) - int(usr_hash[k])) - 24)
 	score = 4 - (total/kmax) #4 ms minus average deviation off normal
-	print(score)
 	if score > 4:
 		score = 1
 	elif score < 0:

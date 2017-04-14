@@ -2,7 +2,7 @@
 
 import smtplib
 import hashlib
-import user
+import hijackingprevention.user as user
 import os
 import base64
 from tornado import gen
