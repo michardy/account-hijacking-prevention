@@ -1,7 +1,7 @@
 import logging
 from tornado import gen
 
-import db_int
+import hijackingprevention.db_int as db_int
 
 logger = logging.getLogger(__name__)
 

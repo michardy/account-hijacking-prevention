@@ -1,9 +1,9 @@
 # The primary purpose of this module is to run data hashing and comparison functions
 # It is also called during the intialization of modules to register their hashing and comparison functions.
 
-import user
-import session
-import api_user
+import hijackingprevention.user as user
+import hijackingprevention.session as session
+import hijackingprevention.api_user as api_user
 
 from tornado import gen
 
