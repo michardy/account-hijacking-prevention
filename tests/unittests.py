@@ -10,5 +10,5 @@ class testReceiverClass(unittest.TestCase):
     def setup(self):
         self.receiver = main.receiver()
     def testFakeHandler(self):
-        request fRequest('testdata')
+        request = fRequest('testdata')
         self.receiver.run()
