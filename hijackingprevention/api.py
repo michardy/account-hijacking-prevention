@@ -86,10 +86,12 @@ class Receiver():
 	def __calculate_sub_rating(self, data_type, sdat, mdat):
 		"""Calculate trust score for specific subtype of user data"""
 		sub_tot = 0
-		if data_type in mdat and data_type in sdat: #loop through all the types of data
+		if data_type in mdat and data_type in sdat:
 			for h in mdat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
-				sub_tot += (yield self.__comparers[data_type](
+				temp = (yield self.__comparers[data_type](
 					sdat[data_type], h))
+				if temp > sub_tot: #fix security issue created by the previous ability to combine multiple low scores
+					sub_tot = temp
 		elif data_type not in sdat: #the user's session data may have expired or have not been collected
 			sub_tot = -1*self.__maxscores[data_type] #score nonexistant data negativly
 		return(sub_tot)
@@ -103,7 +105,7 @@ class Receiver():
 		"""
 		total = 0 #total user score
 		actmax = 0 #maximum achievable total (A user with this score is PERFECT)
-		for dt in self.__comparers.keys():
+		for dt in self.__comparers.keys(): #loop through all the types of data
 			actmax += self.__maxscores[dt] #add data type's max score to the maximum
 			total += yield self.__calculate_sub_rating(dt, sdat, mdat) #calculate sub score for given data type and add it to total
 		try:
