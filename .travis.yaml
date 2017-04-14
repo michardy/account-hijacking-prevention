@@ -16,7 +16,7 @@ install:
 services:
   - mongodb
 # command to run tests
-script: pytest
+script: pytest --ignore=venv/
 addons:
     code_climate:
         repo_token: 76ae3266082ccc738fa128fb381ef2e12fe153de820e85a623138a89f959d720
