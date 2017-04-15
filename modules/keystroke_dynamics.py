@@ -8,7 +8,7 @@ def reformat(key):
 	return(key.replace('.', '_'))
 
 @gen.coroutine
-def hasher(data, key, headers, salt):
+def hasher(data, headers, salt):
 	"""This function provides an initial hasher for collected keyboard flight times."""
 	hashed = {}
 	for k in data.keys():

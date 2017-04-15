@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 @gen.coroutine
-def hasher(data, key, headers, salt):
+def hasher(data, headers, salt):
 	"""This function provides an initial hasher for browser fingerprints that uses a sitewide salt."""
 	return(bcrypt.hashpw(data.encode('utf-8'), salt))
 

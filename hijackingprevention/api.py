@@ -58,7 +58,7 @@ class Receiver():
 			salt = site.get_salt(req['name'])
 			#invoke hasher
 			hash = yield self.__hashers[req['name']](req['data'],
-				req['ck'], headers, salt)
+				headers, salt)
 			#store the result
 			site_id = site.get_id()
 			ses = session.Session(req['sessionID'], site_id, db) #setup session object
