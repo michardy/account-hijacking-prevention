@@ -10,7 +10,7 @@ install:
 services:
   - mongodb
 # command to run tests
-script: pytest --ignore=venv/
+script: pytest --ignore=venv/ --cov
 after_sucess:
   - secure: OhwHGzfBlsjw1suPoCGBjmTa0LLZ7cUuQURI5zhFTCm8T4m/eIZupcElkNngc0k2D3kW0oltoSNg007IZ8MNZyvwSON8eTsG3LYjEj8WpPSnlXGe2/y9VivsPN8nrGN1mgXwpqDuCTeRE+b1VUFSH60tP+O1gyPSJCk80WaUDznOGzlRhja17+nJLDIpFITZ7jkbfMyl5cAHoX7/C+RruadZ0F1KJSRDwc/fYj43RfxP8mokbmI2UcAJOCVsxdjzjUzOY8vWqLNAAK21P7KxU2rC3suzClkJRbOnCeJ50FRrojYtxLfPNRogvLQp9NiTU/Up89L7De1mV/TSt87D40Lo/P0Fk/aT4nFxtGeQjx/FeM4o9gC8EcJ54MtqMH4TaxwSnMzB1LGto7y5W7jbaN5TSm9AeXhx44hfwuSt7+i5wKoxDcT3vNjTGCHwqL1H3zcFnWSe560in/4YPz4qFOtTzYE3Jya+TolUZPrM4XfJGZsbbGKwtG7qtm3lngzrLvTP/XXERV8gnSPzSoy8Jf+ztB2VCCIMx/HeZFqw2SC/3R/eguNpio8ckvNMu1QkfsWLj0XDmSiTcB83lMP0HAl7oKA7Wcoz09Z/zCTwCJxrIZWT2Q5CbGWIFtwk9twcveFm1El8Jdkk02M/dXJtCsm7ONgdu7Q6AhvF56HudOA=
 
