@@ -31,19 +31,23 @@ class FakeCollection():
 		self.replacer_called = True
 
 @gen.coroutine
-def fake_hasher(data, key, headers, salt):
+def fake_hasher(data, headers, salt):
 	'''Emulates a hasher function'''
 	assert data == 'fake_data'
 	assert salt == b'fake_salt'
 	assert headers.get('Host') == headers.get('X-Real-IP')
 	return(str(data)+str(salt)+str(headers.get('X-Real-IP')))
 
+def fake_translator(data):
+	assert data == 'fake_data'
+	return('fake_data')
+
 def test_api_add_data():
+	'''Tests the add_data method of the api class'''
 	headers = {'Host':'127.0.0.1', 'X-Real-IP': '127.0.0.1'}
 
 	rec = api.Receiver()
 	rec.add_hasher('fake_data', fake_hasher)
-	print(rec.__dict__)
 
 	req = {'name':'fake_data', 'ck':'fake_ck', 'sessionID':'fake_sid', 'data':'fake_data'}
 
@@ -60,8 +64,6 @@ def test_api_add_data():
 		'data':{},
 		'expireTimes':{}
 	})
-	#fake_collection.find_one = MagicMock()
-	#fake_collection.find_one_and_replace = MagicMock()
 	db = {
 		'siteList':fake_site_list,
 		'sessionData_site-fake_id':fake_site_data
@@ -69,4 +71,11 @@ def test_api_add_data():
 
 	rec.add_data(req, headers, db)
 	assert fake_site_list.finder_call == {'clientKey':'fake_ck'}
+	assert fake_site_data.finder_call == {}
 	assert fake_site_data.replacer_called
+
+def test_api_copy_data():
+	'''Tests the copy_data method of the api class'''
+	rec = api.Receiver()
+	rec.rec.add_translator('fake_data', fake_translator)
+	rec.copy_data(ses, 'fake_uid', 'fake_site_id')
