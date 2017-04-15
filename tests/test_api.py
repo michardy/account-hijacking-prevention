@@ -71,11 +71,12 @@ def test_api_add_data():
 
 	rec.add_data(req, headers, db)
 	assert fake_site_list.finder_call == {'clientKey':'fake_ck'}
-	assert fake_site_data.finder_call == {}
+	assert fake_site_data.finder_call == {'sid':'fake_sid'}
 	assert fake_site_data.replacer_called
 
 def test_api_copy_data():
 	'''Tests the copy_data method of the api class'''
 	rec = api.Receiver()
-	rec.rec.add_translator('fake_data', fake_translator)
+	rec.add_translator('fake_data', fake_translator)
+	ses = {}
 	rec.copy_data(ses, 'fake_uid', 'fake_site_id')
