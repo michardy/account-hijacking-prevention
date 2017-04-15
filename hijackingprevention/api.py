@@ -50,7 +50,7 @@ class Receiver():
 	@gen.coroutine
 	def add_data(self, req, headers, db):
 		"""This function is called when data is received from a browser to hash and store the data"""
-		if req['name'] in self.__comparers.keys():
+		if req['name'] in self.__hashers.keys():
 			#setup to invoke hasher
 			site = api_user.Site(db)
 			yield site.get_by_client_key(req['ck'],
