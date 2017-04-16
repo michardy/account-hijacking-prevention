@@ -4,5 +4,9 @@
 This is a test system designed to detect and prevent account hijacking. 
 It collects data about the users normal browser and behaviors and uses this to identify malicious logins. 
 
+## Installing
+Instructions on how to install can be found in the wiki [here](https://github.com/michardy/account-hijacking-prevention/wiki/Installation-Instructions).  
+
+## API
 Documentation for the API can be found here:
 https://github.com/michardy/account-hijacking-prevention/wiki/API-Documentation
