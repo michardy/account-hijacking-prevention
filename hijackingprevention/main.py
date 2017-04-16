@@ -44,7 +44,7 @@ class ApiGetTrust(tornado.web.RequestHandler):
 			ses = session.Session(payload['sid'], site_id, db)
 			yield ses.read_db()
 			trust = (yield rec.rec.get_trust(ses.data,
-				member.data, site_id, db))
+				member.data))
 			self.set_status(trust[0])
 			self.write(trust[1])
 		else:

@@ -76,7 +76,7 @@ class Receiver():
 		"""This function is called to store session data permenantly to the user profile"""
 		data = {}
 		for dt in ses.keys():
-			data[dt] = self.__translators[dt](ses[dt])
+			data[dt] = yield self.__translators[dt](ses[dt])
 		member.add_data(data)
 		return(OK)
 
@@ -95,7 +95,7 @@ class Receiver():
 		return(sub_tot)
 
 	@gen.coroutine
-	def get_trust(self, session_dat, user_dat, site, db):
+	def get_trust(self, session_dat, user_dat):
 		"""This scores how trustworthy a user is as a number between -1 and 1.
 		The score is based on how much session data matches the data stored in their user profile.
 		A score of 1 means that the user is perfectly trustworthy, a score of 0 means they cannot be trusted.

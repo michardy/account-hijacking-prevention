@@ -40,6 +40,7 @@ def comparer(ses_hash, usr_hash):
 
 rec.rec.add_comparer('keystroke_dynamics', comparer, 1)
 
+@gen.coroutine
 def translator(data):
 	"""This provides a function that hashes the flight times a second time with a per user hash."""
 	#hashed = {}

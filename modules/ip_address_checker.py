@@ -20,6 +20,7 @@ def comparer(ses_hash, usr_hash):
 
 rec.rec.add_comparer('ip', comparer, 1) #register the previous function
 
+@gen.coroutine
 def translator(data):
 	"""This function provides a second stage per user salted hasher for data that will be stored indefinitly."""
 	salt = bcrypt.gensalt()

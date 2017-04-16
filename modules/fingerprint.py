@@ -19,6 +19,7 @@ def comparer(ses_hash, usr_hash):
 
 rec.rec.add_comparer('fingerprint', comparer, 1)
 
+@gen.coroutine
 def translator(data):
 	"""This provides a function that hashes the fingerprint a second time with a per user hash."""
 	salt = bcrypt.gensalt()
