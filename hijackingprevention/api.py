@@ -99,7 +99,7 @@ class Receiver():
 		"""This scores how trustworthy a user is as a number between -1 and 1.
 		The score is based on how much session data matches the data stored in their user profile.
 		A score of 1 means that the user is perfectly trustworthy, a score of 0 means they cannot be trusted.
-		A negative score means that the users data has expired and an accurate determination cannot be made.
+		A negative score means that the session data has expired and an accurate determination cannot be made.
 		"""
 		total = 0 #total user score
 		actmax = 0 #maximum achievable total (A user with this score is PERFECT)
