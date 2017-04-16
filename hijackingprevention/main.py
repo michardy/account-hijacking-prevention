@@ -58,14 +58,25 @@ class ApiRegisterUser(tornado.web.RequestHandler):
 	def post(self):
 		payload = json.loads(self.request.body.decode('utf-8'))
 		db = self.settings['db']
+
+		#Get the site_id
 		site = api_user.Site(db)
 		yield site.get_by_server_key(payload['ak'])
 		site_id = site.get_id()
+
+		#Get the session object that we are going to copy
 		ses = session.Session(payload['sid'], site_id, db)
 		yield ses.read_db()
+
 		if ses.data.keys():
-			out = yield rec.rec.copy_data(ses.data, payload['uid'],
-				site_id, db)
+			#Get the user object to copy session data into
+			member = user.User(payload['uid'], site_id, db)
+			yield member.read_db()
+			#preform the copy
+			out = yield rec.rec.copy_data(ses.data,
+				member)
+			#Save the copy
+			yield member.write_out()
 			self.set_status(out[0])
 			self.write(out[1])
 		else:

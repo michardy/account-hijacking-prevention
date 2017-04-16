@@ -1,7 +1,7 @@
 # The primary purpose of this module is to run data hashing and comparison functions
 # It is also called during the intialization of modules to register their hashing and comparison functions.
+# Try to leave all the boilerplate calls like DB access and JSON decoding in the main.py file
 
-import hijackingprevention.user as user
 import hijackingprevention.session as session
 import hijackingprevention.api_user as api_user
 
@@ -50,6 +50,7 @@ class Receiver():
 	@gen.coroutine
 	def add_data(self, req, headers, db):
 		"""This function is called when data is received from a browser to hash and store the data"""
+		# This function has, rather irritatingly, remained in spite of my attempt to keep database access out of the api.py file.  
 		if req['name'] in self.__hashers.keys():
 			#setup to invoke hasher
 			site = api_user.Site(db)
@@ -71,15 +72,12 @@ class Receiver():
 			return(400, 'Err: Could not find a handler for "' + req['name'] + '"')
 
 	@gen.coroutine
-	def copy_data(self, ses, uid, site_id, db):
+	def copy_data(self, ses, member):
 		"""This function is called to store session data permenantly to the user profile"""
 		data = {}
 		for dt in ses.keys():
 			data[dt] = self.__translators[dt](ses[dt])
-		member = user.User(uid, site_id, db)
-		yield member.read_db()
 		member.add_data(data)
-		yield member.write_out()
 		return(OK)
 
 	@gen.coroutine
