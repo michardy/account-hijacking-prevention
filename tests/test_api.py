@@ -12,8 +12,11 @@ import datetime
 import time
 
 from tornado import gen
+from tornado import testing
 
 import hijackingprevention.api as api
+
+#import pytest
 
 class FakeCollection():
 	'''Fake MongoDB collection object'''
@@ -50,9 +53,14 @@ def fake_hasher(data, headers, salt):
 	assert headers.get('Host') == headers.get('X-Real-IP')
 	return('hashed_fake_data')
 
+@gen.coroutine
 def fake_translator(data):
 	assert data == 'fake_data'
 	return('translated_fake_data')
+
+#@gen.coroutine
+def fake_comparer(ses_hash, usr_hash):
+	return(ses_hash == usr_hash)#in reality we would rehash the session data
 
 def test_api_add_data():
 	'''Tests the add_data method of the api class'''
@@ -105,3 +113,36 @@ def test_api_copy_data():
 	})'''
 	rec.copy_data(ses, fake_user_data)
 	assert fake_user_data.added_data == {'fake_data_type':'translated_fake_data'}
+
+
+def launder(): #PyTest will not let test functions touch a yield statment so it must be done indirectly
+	#This function appears to never be called instead the test has an existential crisis
+	print('anyone home')
+	session_data = {
+		'fake_data_type_passing_1':['fake_data'],
+		'fake_data_type_passing_2':['fake_data']
+	}
+	user_data = {
+		'fake_data_type_expired':['fake_data'],
+		'fake_data_type_passing_1':['fake_data'],
+		'fake_data_type_passing_2':['fake_data']
+	}
+	rec = api.Receiver()
+	rec.add_comparer('fake_data_type_expired', fake_comparer, 1)
+	rec.add_comparer('fake_data_type_passing_1', fake_comparer, 1)
+	rec.add_comparer('fake_data_type_passing_2', fake_comparer, 1)
+	rec.add_comparer('fake_data_type_missing', fake_comparer, 1)
+	irv = yield rec.get_trust(session_data, user_data)
+	print(irv)
+	out = []
+	for i in irv:
+		tempout = yield i
+		print(tempout)
+		out.append(tempout)
+	return(out[1])
+
+def test_api_get_trust():
+	out = launder()
+	print(out)
+	#assert False
+
