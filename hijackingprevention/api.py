@@ -81,21 +81,21 @@ class Receiver():
 		return(OK)
 
 	@gen.coroutine
-	def __calculate_sub_rating(self, data_type, sdat, mdat):
+	def __calculate_sub_rating(self, data_type, session_dat, user_dat):
 		"""Calculate trust score for specific subtype of user data"""
 		sub_tot = 0
-		if data_type in mdat and data_type in sdat:
-			for h in mdat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
+		if data_type in user_dat and data_type in session_dat:
+			for h in user_dat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
 				temp = (yield self.__comparers[data_type](
-					sdat[data_type], h))
+					session_dat[data_type], h))
 				if temp > sub_tot: #fix security issue created by the previous ability to combine multiple low scores
 					sub_tot = temp
-		elif data_type not in sdat: #the user's session data may have expired or have not been collected
+		elif data_type not in session_dat: #the user's session data may have expired or have not been collected
 			sub_tot = -1*self.__maxscores[data_type] #score nonexistant data negativly
 		return(sub_tot)
 
 	@gen.coroutine
-	def get_trust(self, sdat, mdat, site, db):
+	def get_trust(self, session_dat, user_dat, site, db):
 		"""This scores how trustworthy a user is as a number between -1 and 1.
 		The score is based on how much session data matches the data stored in their user profile.
 		A score of 1 means that the user is perfectly trustworthy, a score of 0 means they cannot be trusted.
@@ -105,7 +105,7 @@ class Receiver():
 		actmax = 0 #maximum achievable total (A user with this score is PERFECT)
 		for dt in self.__comparers.keys(): #loop through all the types of data
 			actmax += self.__maxscores[dt] #add data type's max score to the maximum
-			total += yield self.__calculate_sub_rating(dt, sdat, mdat) #calculate sub score for given data type and add it to total
+			total += yield self.__calculate_sub_rating(dt, session_dat, user_dat) #calculate sub score for given data type and add it to total
 		try:
 			return(200, str(total/actmax))
 		except ZeroDivisionError:
