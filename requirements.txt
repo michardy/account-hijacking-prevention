@@ -6,10 +6,8 @@ coverage==4.3.4
 cryptography==1.8.1
 greenlet==0.4.12
 idna==2.5
-mock==2.0.0
 motor==1.1
 packaging==16.8
-pbr==2.1.0
 py==1.4.33
 pyasn1==0.2.3
 pycparser==2.17
