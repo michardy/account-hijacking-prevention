@@ -90,7 +90,7 @@ class Receiver():
 					session_dat[data_type], h))
 				if temp > sub_tot: #fix security issue created by the previous ability to combine multiple low scores
 					sub_tot = temp
-		elif data_type not in session_dat: #the user's session data may have expired or have not been collected
+		elif data_type not in session_dat and data_type in user_dat: #the user's session data may have expired or have not been collected
 			sub_tot = -1*self.__maxscores[data_type] #score nonexistant data negativly
 		return(sub_tot)
 
