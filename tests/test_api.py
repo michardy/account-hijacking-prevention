@@ -4,7 +4,6 @@ pathfix.fixpath()
 import datetime
 
 from tornado import gen
-from tornado import testing
 
 import hijackingprevention.api as api
 
