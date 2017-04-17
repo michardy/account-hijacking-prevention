@@ -1,9 +1,5 @@
-#Fixes pytest path problems
-#May break the Python interpreter's ability to run this program
-import sys
-import os
-corrected_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, corrected_path + '/../')
+import pathfix
+pathfix.fixpath()
 
 import datetime
 
@@ -121,13 +117,13 @@ class Launderer(): #PyTest will not let test functions touch a yield statment so
 	@gen.coroutine
 	def invoke_untouchable(self):
 		session_data = {
-			'fake_data_type_passing_1':'fake_data',
-			'fake_data_type_passing_2':'fake_data'
+			'fake_data_type_passing_1':'fake_data1',
+			'fake_data_type_passing_2':'fake_data2'
 		}
 		user_data = {
 			'fake_data_type_expired':['fake_data'],
-			'fake_data_type_passing_1':['fake_data', 'fake_data', 'fake_fake_data'],
-			'fake_data_type_passing_2':['fake_data', 'fake_data']
+			'fake_data_type_passing_1':['fake_data1', 'fake_data', 'fake_fake_data'],
+			'fake_data_type_passing_2':['fake_data2', 'fake_data']
 		}
 		rec = api.Receiver()
 		rec.add_comparer('fake_data_type_expired', fake_comparer, 1)
