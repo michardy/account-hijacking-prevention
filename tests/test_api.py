@@ -59,7 +59,7 @@ def test_api_add_data():
 	rec = api.Receiver()
 	rec.add_hasher('fake_data', fake_hasher)
 
-	req = {'name':'fake_data', 'ck':'fake_ck', 'sessionID':'fake_sid', 'data':'fake_data'}
+	req = {'name':'fake_data', 'ck':'fake_ck', 'sid':'fake_sid', 'data':'fake_data'}
 
 	fake_site_list = FakeCollection({
 		'clientKey':'fake_ck',

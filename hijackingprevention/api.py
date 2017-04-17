@@ -62,7 +62,7 @@ class Receiver():
 				headers, salt)
 			#store the result
 			site_id = site.get_id()
-			ses = session.Session(req['sessionID'], site_id, db) #setup session object
+			ses = session.Session(req['sid'], site_id, db) #setup session object
 			yield ses.read_db() #read session if it exists
 			ses.add_data({req['name']:hash}) #add data to session object
 			yield ses.write_out() #update session object in database
