@@ -111,8 +111,10 @@ class Launderer(): #PyTest will not let test functions touch a yield statment so
 	Q: would you like to apologize.
 	A: I applagize.   
 	'''
-	def __init__self(self):
+	def __init__(self, rec):
+		self.__rec = rec
 		self.score = ''
+		self.status = 0
 	@gen.coroutine
 	def invoke_untouchable(self):
 		'''Call the function that needs a yield'''
@@ -125,16 +127,24 @@ class Launderer(): #PyTest will not let test functions touch a yield statment so
 			'fake_data_type_passing_1':['fake_data1', 'fake_data', 'fake_fake_data'],
 			'fake_data_type_passing_2':['fake_data2', 'fake_data']
 		}
-		rec = api.Receiver()
-		rec.add_comparer('fake_data_type_expired', fake_comparer, 1)
-		rec.add_comparer('fake_data_type_passing_1', fake_comparer, 1)
-		rec.add_comparer('fake_data_type_passing_2', fake_comparer, 1)
-		rec.add_comparer('fake_data_type_missing', fake_comparer, 1)
-		out = yield rec.get_trust(session_data, user_data)
+		out = yield self.__rec.get_trust(session_data, user_data)
 		self.score = out[1]
+		self.status = out[0]
 	
 def test_api_get_trust():
-	launderer = Launderer()
+	rec = api.Receiver()
+	rec.add_comparer('fake_data_type_expired', fake_comparer, 1)
+	rec.add_comparer('fake_data_type_passing_1', fake_comparer, 1)
+	rec.add_comparer('fake_data_type_passing_2', fake_comparer, 1)
+	rec.add_comparer('fake_data_type_missing', fake_comparer, 1)
+	launderer = Launderer(rec)
 	launderer.invoke_untouchable()
+	assert launderer.status == 200
 	assert launderer.score == '0.25'
 
+def test_api_get_trust_no_modules():
+	rec = api.Receiver()
+	launderer = Launderer(rec)
+	launderer.invoke_untouchable()
+	assert launderer.status == 501
+	assert launderer.score == 'This server does not have any data collection and analysis modules installed'
