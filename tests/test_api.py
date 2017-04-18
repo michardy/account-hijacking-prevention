@@ -132,6 +132,7 @@ class Launderer(): #PyTest will not let test functions touch a yield statment so
 		self.status = out[0]
 	
 def test_api_get_trust():
+	'''Tests api.py get_trust'''
 	rec = api.Receiver()
 	rec.add_comparer('fake_data_type_expired', fake_comparer, 1)
 	rec.add_comparer('fake_data_type_passing_1', fake_comparer, 1)
@@ -143,6 +144,7 @@ def test_api_get_trust():
 	assert launderer.score == '0.25'
 
 def test_api_get_trust_no_modules():
+	'''Tests that api.py get_trust fails when not supplied modules'''
 	rec = api.Receiver()
 	launderer = Launderer(rec)
 	launderer.invoke_untouchable()
