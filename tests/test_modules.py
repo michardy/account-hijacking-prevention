@@ -21,16 +21,19 @@ class Launderer():
 		self.hash = yield self.__hasher(self.data, headers, salt)
 
 def test_fingerprint_hasher():
+	'''Tests fingerprint module hasher'''
 	launderer = Launderer(fingerprint.hasher, 'fake_data')
 	launderer.invoke_untouchable()
 	assert launderer.hash == b'$2b$12$be22kDNa1.ZduxRmhfJWoOmQZBb1hlO1972OO70yZhTpX2o02VN3m'
 
 def test_ip_address_checker_hasher():
+	'''Tests ip_address module hasher'''
 	launderer = Launderer(ip_address_checker.hasher, '')
 	launderer.invoke_untouchable()
 	assert launderer.hash == b'$2b$12$be22kDNa1.ZduxRmhfJWoOmQZBb1hlO1972OO70yZhTpX2o02VN3m'
 
 def test_keystroke_dynamics_hasher():
+	'''Tests keystroke_dynamics hasher'''
 	data = {
 		'1.2': '1.3',
 		'1.4': '1.5'

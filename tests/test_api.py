@@ -115,6 +115,7 @@ class Launderer(): #PyTest will not let test functions touch a yield statment so
 		self.score = ''
 	@gen.coroutine
 	def invoke_untouchable(self):
+		'''Call the function that needs a yield'''
 		session_data = {
 			'fake_data_type_passing_1':'fake_data1',
 			'fake_data_type_passing_2':'fake_data2'
