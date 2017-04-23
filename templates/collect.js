@@ -9,7 +9,7 @@ function collect(){
 	for (var c = 0; c < collectors.length; c++){
 		var res = eval(collectors[c]+'()');
 		if (!async[c]){
-			send(res[0], res[1], hijackingPreventionCK, hijackingPreventionSID);
+			hijackingPreventionSend(res[0], res[1], hijackingPreventionCK, hijackingPreventionSID);
 		}
 	}
 }

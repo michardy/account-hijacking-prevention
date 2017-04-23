@@ -86,7 +86,7 @@ function keyDynCB(){
 		var kc = Object.keys(measurements).sort()[i];
 		diffs[kc] = keyDynAverage(measurements[kc]);
 	}
-	send('keystroke_dynamics', diffs, hijackingPreventionCK, hijackingPreventionSID);
+	hijackingPreventionSend('keystroke_dynamics', diffs, hijackingPreventionCK, hijackingPreventionSID);
 }
 
 function keyDynUP(e){

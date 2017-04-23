@@ -1,5 +1,5 @@
-function send(id, data, ck, sid){
+function hijackingPreventionSend(id, data, ck, sid){
 	var xhttpr = new XMLHttpRequest()
 	xhttpr.open("POST", "http://localhost:8080/api/sub_dat")
-	xhttpr.send(JSON.stringify({'name':id,'data':data,'ck':ck,'sid':sid,'site':'test'}))
+	xhttpr.send(JSON.stringify({'name':id,'data':data,'ck':ck,'sid':sid}))
 }
