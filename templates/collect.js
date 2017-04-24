@@ -14,4 +14,4 @@ function collect(){
 	}
 }
 
-window.onload = collect;
+collect();

@@ -29,13 +29,13 @@ def comparer(ses_hash, usr_hash):
 		if k in ses_hash:
 			kmax += 1
 			total += (abs(int(ses_hash[k]) - int(usr_hash[k])) - 24)
-	score = 4 - (total/kmax) #4 ms minus average deviation off normal
-	if score > 4:
+	score = 4.8 - (total/kmax) #4 ms minus average deviation off normal
+	if score > 4.8:
 		score = 1
 	elif score < 0:
 		score = 0
 	else:
-		score = abs(score)/4
+		score = abs(score)/4.8
 	return(score)
 
 rec.rec.add_comparer('keystroke_dynamics', comparer, 1)
@@ -103,8 +103,8 @@ function keyDynDW(e){
 }
 
 function keystroke_dynamics(){
-	window.onkeydown = keyDynDW;
-	window.onkeyup = keyDynUP;
+	document.addEventListener('keydown', keyDynDW, false);
+	document.addEventListener('keyup', keyDynUP, false);
 }
 '''
 
