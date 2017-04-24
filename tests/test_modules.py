@@ -80,7 +80,8 @@ def test_keystroke_dynamics_comparer_partial():
 	'''Tests ip_address module comparer for a very iffy user'''
 	launderer = Launderer(keystroke_dynamics.comparer, {'1_2':'13','1_4':'15'}, {'1_2':'38','1_4':'42'}, None, 2)
 	launderer.invoke_untouchable()
-	assert launderer.hash == 0.5
+	assert launderer.hash > 0.5
+	assert launderer.hash < 1
 
 def test_keystroke_dynamics_comparer_fail():
 	'''Tests ip_address module comparer for probable attacker'''
