@@ -93,7 +93,7 @@ def run_user_tests(submitter):
 		sid = str(uuid.uuid1())
 		sub_dat(submitter[ds-1], 'keystroke_dynamics', None, sid)
 		res = get_trust(sid, uid)
-		print(f'Pass: {res}')
+		print('Pass: %s', res)
 		if res > 0.5:
 			subpass += 1
 		subtotp += 1
@@ -116,7 +116,7 @@ class MultiUserTests():
 			sub_dat(self.__last[0], 'keystroke_dynamics', None, sid)
 			res = get_trust(sid, uid)
 			self.__last = None
-			print(f'fail: {res}')
+			print('fail: %s', res)
 			return(int(res <= 0.5))
 
 @pytest.mark.skipif(not os.path.isfile('tests/res.json'),
@@ -151,7 +151,7 @@ def test_user_data():
 				totfail += 1
 	passr = passing/totpass
 	failr = failing/totfail
-	print(f'Passing Rate: {passr}')
-	print(f'Failing Rate: {failr}')
+	print('Passing Rate: %s', passr)
+	print('Failing Rate: %s', failr)
 	assert passr > 0.8
 	assert failr > 0.8
