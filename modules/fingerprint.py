@@ -10,14 +10,14 @@ def hasher(data, headers, salt):
 	"""This function provides an initial hasher for browser fingerprints that uses a sitewide salt."""
 	return(bcrypt.hashpw(data.encode('utf-8'), salt))
 
-rec.rec.add_hasher('fingerprint', hasher)
+rec.rec.add_hasher('michardy:fingerprint', hasher)
 
 @gen.coroutine
 def comparer(ses_hash, usr_hash):
 	"""This provides a function to compare initially hashed fingerprints with doubly hashed stored fingerprints."""
 	return(bcrypt.hashpw(ses_hash, usr_hash) == usr_hash)
 
-rec.rec.add_comparer('fingerprint', comparer, 1)
+rec.rec.add_comparer('michardy:fingerprint', comparer, 1)
 
 @gen.coroutine
 def translator(data):
@@ -25,14 +25,14 @@ def translator(data):
 	salt = bcrypt.gensalt()
 	return(bcrypt.hashpw(data, salt))
 
-rec.rec.add_translator('fingerprint', translator)
+rec.rec.add_translator('michardy:fingerprint', translator)
 
 #JavaScript data collection function
 fxn = '''
 function fingerprint(){
 	var sr = window.screen.height.toString() + window.screen.width.toString() + window.screen.availHeight.toString() + window.screen.availWidth.toString() + navigator.hardwareConcurrency.toString();
-	return(['fingerprint', sr]);
+	return(['michardy:fingerprint', sr]);
 }
 '''
 
-rec.mods.add('fingerprint', fxn, False)
+rec.mods.add('michardy:fingerprint', fxn, False)

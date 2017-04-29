@@ -18,7 +18,7 @@ def hasher(data, headers, salt):
 		#issue: security
 	return(hashed)
 
-rec.rec.add_hasher('keystroke_dynamics', hasher)
+rec.rec.add_hasher('michardy:keystroke_dynamics', hasher)
 
 @gen.coroutine
 def comparer(ses_hash, usr_hash):
@@ -38,7 +38,7 @@ def comparer(ses_hash, usr_hash):
 		score = abs(score)/4.8
 	return(score)
 
-rec.rec.add_comparer('keystroke_dynamics', comparer, 1)
+rec.rec.add_comparer('michardy:keystroke_dynamics', comparer, 1)
 
 @gen.coroutine
 def translator(data):
@@ -47,7 +47,7 @@ def translator(data):
 	#issue: security
 	return(data)
 
-rec.rec.add_translator('keystroke_dynamics', translator)
+rec.rec.add_translator('michardy:keystroke_dynamics', translator)
 
 # JavaScript data collection function
 fxn = '''
@@ -84,7 +84,7 @@ function keyDynCB(){
 		var kc = Object.keys(measurements).sort()[i];
 		diffs[kc] = keyDynAverage(measurements[kc]);
 	}
-	hijackingPreventionSend('keystroke_dynamics', diffs, hijackingPreventionCK, hijackingPreventionSID);
+	hijackingPreventionSend('michardy:keystroke_dynamics', diffs, hijackingPreventionCK, hijackingPreventionSID);
 }
 
 function keyDynUP(e){
@@ -106,4 +106,4 @@ function keystroke_dynamics(){
 }
 '''
 
-rec.mods.add('keystroke_dynamics', fxn, True)
+rec.mods.add('michardy:keystroke_dynamics', fxn, True)
