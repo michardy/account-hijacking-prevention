@@ -43,10 +43,8 @@ rec.rec.add_comparer('keystroke_dynamics', comparer, 1)
 @gen.coroutine
 def translator(data):
 	"""This provides a function that hashes the flight times a second time with a per user hash."""
-	#hashed = {}
-	#for k in data.keys(): #no hashing
-		#maybe encrypt db keys to anonymize data
-		#hashed[k] = data[k] #issue: security
+	#also no hashing
+	#issue: security
 	return(data)
 
 rec.rec.add_translator('keystroke_dynamics', translator)

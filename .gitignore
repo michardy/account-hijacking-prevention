@@ -7,3 +7,5 @@ hijackingprevention/__pycache__/**
 tests/__pycache__/**
 tests/.cache/**
 .coverage
+
+tests/res.json
