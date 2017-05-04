@@ -1,8 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8"></meta>
 		<title> Account Hijacking Prevention</title>
+		<link rel="stylesheet" href="main.css"
 	</head>
 	<body>
+		<header>
+			<h1><a href="/account-hijacking-prevention">Account Hijacking Prevention</a></h1>
+		</header>
+		<main>
+			<article id="intro">
+				<p>The purpose of this project is to provide website administrators with an open source peice of software to prevent account hijacking.  </p>
+			</article>
+			<article id="about">
+				<h3>About</h3>
+				<p>I initially create this project to provide an open source solution to the problem of how to detect account hijacking. The initial project would use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. The use of modules though still leaves room for expansion of the project past its current state.</p>
+				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
+				<p>The current keystroke dynamic system collects the average amount of time needed to change between different keys and compares it to previous averages. Currently the comparison is done by finding all the overlapping keys and finding the difference between the average.</p>
+			</article>
+		</main>
+		<nav>
+			<ol>
+				<li><a href="#about">About</a></li>
+				<li><a href="#install">Instalation</a></li>
+			</ol>
+		</nav>
 	</body>
 </html>
