@@ -5,7 +5,7 @@
 var collectors = {% raw col_list %};
 var async = {% raw async_list %}
 
-function collect(){
+function hijackingPreventionCollect(){
 	for (var c = 0; c < collectors.length; c++){
 		var res = eval(collectors[c]+'()');
 		if (!async[c]){
@@ -14,4 +14,4 @@ function collect(){
 	}
 }
 
-collect();
+hijackingPreventionCollect();
