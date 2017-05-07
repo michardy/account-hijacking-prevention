@@ -1,4 +1,9 @@
+/*
+If you feel that this looks awful or is a personal affront to you please suggest changes.  My artisic abilities are somewhat lacking.  
+*/
+
 body {
+	overflow-x:hidden;
 	display: grid;
 	width:100%;
 	grid-template-columns: repeat(4, 1fr);
@@ -8,6 +13,11 @@ body {
 header {
 	grid-column: 1 / 4;
 	grid-row: 1;
+	padding-bottom:15px;
+}
+
+header h1 a {
+	text-decoration:none;
 }
 
 nav {
@@ -18,4 +28,16 @@ nav {
 main {
 	grid-column: 2 / 4;
 	grid-row: 2;
+}
+
+.navbar {
+	display:inline;
+}
+
+h1 {
+	font-family: monospace;
+}
+
+h2, h3, h4, h5, h6 {
+	font-family:sans-serif;
 }
