@@ -30,6 +30,11 @@ main {
 	grid-row: 2;
 }
 
+footer {
+	grid-column: 3;
+	grid-row: 4;
+}
+
 .navbar {
 	display:inline;
 }
