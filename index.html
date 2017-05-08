@@ -26,7 +26,7 @@
 			}
 		</script>
 		<!--And now for the actual standard that everyone seems to need their own version of (Facebook, Twitter, Google):-->
-		<title> Account Hijacking Prevention</title>
+		<title>Account Hijacking Prevention</title>
 		<meta name="description" content="An open source software project focused on preventing account hijacking (or account takeover) attacks."/>
 		<!--Question: Where is the URL property?  Open Graph Protocol has it.  
 		Answer: How are you looking at this page without the URL?
@@ -63,7 +63,6 @@
 				<h2>About</h2><!--Probably misplaced-->
 				<p>I initially create this project to provide an open source solution to the problem of how to detect account hijacking. The initial project would use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
 				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
-				<p>The current keystroke dynamic system collects the average amount of time needed to change between different keys and compares it to previous averages. Currently the comparison is done by finding all the overlapping keys and finding the difference between the averages.</p>
 			</article>
 			<article id="design">
 				<h2>Design</h2>
@@ -83,6 +82,7 @@
 				<h2>Methods</h2>
 				<section id="key_dyn">
 					<h3>Keystroke Dynamics</h3>
+					<p>The current keystroke dynamic system collects the average amount of time needed to change between different keys and compares it to previous averages. Currently the comparison is done by finding all the overlapping keys and finding the difference between the averages.</p>
 				</section>
 			</article>
 			<article id="results">
