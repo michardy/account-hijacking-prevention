@@ -61,7 +61,7 @@
 			</article>
 			<article id="about">
 				<h2>About</h2><!--Probably misplaced-->
-				<p>I initially create this project to provide an open source solution to the problem of how to detect account hijacking. The initial project would use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. While my work has largly focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
+				<p>I initially create this project to provide an open source solution to the problem of how to detect account hijacking. The initial project would use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
 				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
 				<p>The current keystroke dynamic system collects the average amount of time needed to change between different keys and compares it to previous averages. Currently the comparison is done by finding all the overlapping keys and finding the difference between the averages.</p>
 			</article>
@@ -70,13 +70,13 @@
 				<p>My system has two parts a set of modules and server component.  </p>
 				<div id="server">
 					<h3>Server</h3>
-					<p>The server is the part of my project resposible for running module components, handling requests, and combining the results of the different modules.  From a software perspective it handles all the things that are abstracted away so that modules do not have to do them.  </p>
+					<p>The server is the part of my project responsible for running module components, handling requests, and combining the results of the different modules.  From a software perspective it handles all the things that are abstracted away so that modules do not have to do them.  </p>
 					<p>When the server starts up it imports all of the modules and registers their functions and scripts.  In ordinary use a protected page loads the scripts from the server and they collect data for processing by the server.  </p>
 				</div>
 				<section id="modules">
 					<h3>Modules</h3>
-					<p></p>
-					<p>For a guid on module development please see the <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Writing-Modules">wiki page</a>. </p>
+					<p>The modules specify the scripts that are sent to web browsers and used to collect data as well as the methods used to process the returned data.  Each module contains several parts: a JavaScript script that is sent to the web browser to collect data, two Python function for hashing the data before it is stored and a function that compares the collected data against the stored data to assess how much to trust the user.  </p>
+					<p>For a guide on module development please see the <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Writing-Modules">wiki page</a>. </p>
 				</section>
 			</article>
 			<article id="methedology">
