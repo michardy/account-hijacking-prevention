@@ -21,8 +21,11 @@ header h1 a {
 }
 
 nav {
-	grid-column: 1;
-	grid-row: 2;
+	position: fixed;
+	left:0px;
+	top:120px;
+	border:1px solid;
+	width: 12.5%;
 }
 
 main {
