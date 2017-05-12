@@ -64,11 +64,11 @@
 			</article>
 			<article id="about">
 				<h2>About</h2><!--Probably misplaced-->
-				<p>I initially create this project to provide an open source solution to the problem of how to detect account hijacking. The initial project would use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
+				<p>When I originally came up with this project I wanted to use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
 			</article>
 			<article id="design">
 				<h2>Design</h2>
-				<p>My stystem is designed to preform authentication at any time on demand.  It continuously updates its data about the user on each page load so that it can identify session hijacking.  It consists of two parts a set of modules and server component.  </p>
+				<p>My stystem is designed to preform authentication at any time on demand.  It updates its data about the user on each page load so that it can identify session hijacking.  The software consists of two parts a set of modules and server component.  </p>
 				<div id="server">
 					<h3>Server</h3>
 					<p>The server is the part of my project responsible for running module components, handling requests, and combining the results of the different modules.  From a software perspective it handles all the things that are abstracted away so that modules do not have to do them.  </p>
@@ -76,7 +76,7 @@
 				</div>
 				<section id="modules">
 					<h3>Modules</h3>
-					<p>The modules specify the scripts that are sent to web browsers and used to collect data as well as the methods used to process the returned data.  Each module contains several parts: a JavaScript script that is sent to the web browser to collect data, two Python function for hashing the data before it is stored and a function that compares the collected data against the stored data to assess how much to trust the user.  </p>
+					<p>The modules specify the scripts that are sent to web browsers and used to collect data as well as the methods used to process the returned data.  Each module contains several parts: a JavaScript script that is sent to the web browser to collect data, two Python function for hashing the data before it is stored, and a function that compares the collected data against the stored data to assess how much to trust the user.  </p>
 					<p>For a guide on module development please see the <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Writing-Modules">wiki page</a>. </p>
 				</section>
 			</article>
@@ -84,12 +84,13 @@
 				<h2>Methods</h2>
 				<section id="key_dyn">
 					<h3>Keystroke Dynamics</h3>
-					<p>The current keystroke dynamics system collects the average amount of time needed to change between different keys.  During processing these collected averages are then compared to previous averages and scored. Currently the comparison is done by finding all the overlapping keys and finding the difference between the averages.  The deviations are then averaged and used to decide the final score of the user.  </p>
+					<p>The current keystroke dynamics system collects the average amount of time needed to change between different keys.  During processing these collected averages are then compared to previous averages and scored. Currently the comparison is done by finding all the overlapping keys and finding the difference between the averages.  The the differences between the times in the stored set and the collected data are then averaged and used to decide the final score of the user.  If the average deviation between the collected times and the new ones is too high the person typing is probably no who they say they are.  </p>
 				</section>
 			</article>
 			<article id="results">
 				<h2>Results</h2>
-				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
+				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately, I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
+				<p>In the course of writing this software I have realized that other methods may be needed to identify the individual typing in our increasingly phone based world.  Phones have few identifiable traits compared to PCs and strive to eliminate typing making it hard to accuratly confirm the identity of a user on a mobile phone.  </p>
 			</article>
 			<article id="install">
 				<h2>Installing</h2>
