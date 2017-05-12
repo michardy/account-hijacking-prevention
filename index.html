@@ -68,7 +68,9 @@
 			</article>
 			<article id="design">
 				<h2>Design</h2>
-				<p>My stystem is designed to preform authentication at any time on demand.  It updates its data about the user on each page load so that it can identify session hijacking.  The software consists of two parts a set of modules and server component.  </p>
+				<p>My system is designed to preform authentication at any time and returns a trust score rather than a simple true/false reply.  This comes with some drawbacks, it cannot be installed without configuration and improper setup can reduce the amount of security it confers.  The configuration allows for the creation of higher and lower security zones on a site, for sites to preform continuous authentication, and for more sensitive sites to require more trust.  </p>
+				<p>The authentication is preformed using data collected from the user's browser with JavaScript.  The scripts update the data collected about the user on each page load in order to help identify session hijacking.  </p>
+				<p>The software consists of two parts a set of modules and server component.  </p>
 				<div id="server">
 					<h3>Server</h3>
 					<p>The server is the part of my project responsible for running module components, handling requests, and combining the results of the different modules.  From a software perspective it handles all the things that are abstracted away so that modules do not have to do them.  </p>
@@ -98,7 +100,7 @@
 			</article>
 			<article id="contrib">
 				<h2>Contributing</h2>
-				<p>If you wish to help with this project you can suggest improvments to the <a href="https://github.com/michardy/account-hijacking-prevention/wiki">documentation</a> or submit a pull request.  A set of possible improvments for this project are available <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Improvments">here</a> and in the <a href="https://github.com/michardy/account-hijacking-prevention/issues">issue tracker</a>.</p>
+				<p>If you wish to help with this project you can suggest improvements to the <a href="https://github.com/michardy/account-hijacking-prevention/wiki">documentation</a> or submit a pull request.  A set of possible improvements for this project are available <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Improvments">here</a> and in the <a href="https://github.com/michardy/account-hijacking-prevention/issues">issue tracker</a>.</p>
 			</article>
 		</main>
 		<footer>
