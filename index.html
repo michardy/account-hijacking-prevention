@@ -65,11 +65,10 @@
 			<article id="about">
 				<h2>About</h2><!--Probably misplaced-->
 				<p>I initially create this project to provide an open source solution to the problem of how to detect account hijacking. The initial project would use a system of modules to score the user's authenticity for a series of metrics. After writing the overarching system used by the modules I largely switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
-				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
 			</article>
 			<article id="design">
 				<h2>Design</h2>
-				<p>My system has two parts a set of modules and server component.  </p>
+				<p>My stystem is designed to preform authentication at any time on demand.  It continuously updates its data about the user on each page load so that it can identify session hijacking.  It consists of two parts a set of modules and server component.  </p>
 				<div id="server">
 					<h3>Server</h3>
 					<p>The server is the part of my project responsible for running module components, handling requests, and combining the results of the different modules.  From a software perspective it handles all the things that are abstracted away so that modules do not have to do them.  </p>
@@ -90,7 +89,7 @@
 			</article>
 			<article id="results">
 				<h2>Results</h2>
-				<p></p>
+				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
 			</article>
 			<article id="install">
 				<h2>Installing</h2>
