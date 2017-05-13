@@ -51,7 +51,14 @@
 						<li><a href="#modules">Modules</a></li>
 					</ol>
 				</li>
-				<li><a href="#methedology">Methods</a></li>
+				<li>
+					<a href="#methedology">Methods of Verification</a>
+					<ol>
+						<li><a href="#key_dyn">Keystroke Dynamics</a></li>
+						<li><a href="#fingerprinting">Browser Fingerprinting</a></li>
+						<li><a href="#IP">IP Address Checking</a></li>
+					</ol>
+				</li>
 				<li><a href="#results">Results</a></li>
 				<li><a href="#install">Instalation</a></li>
 				<li><a href="#contrib">Contributing</a></li>
@@ -64,11 +71,11 @@
 			</article>
 			<article id="about">
 				<h2>About</h2><!--Probably misplaced-->
-				<p>When I originally came up with this project I wanted to use a system of modules to score the user's legitimacy for a series of metrics. After writing the overarching system used by the modules I switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
+				<p>When I originally came up with this project I wanted to use a system of modules to score the user's legitimacy with a series of tests. After writing the overarching system used by the modules I switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
 			</article>
 			<article id="design">
 				<h2>Design</h2>
-				<p>My system is designed to preform authentication at any time and returns a trust score rather than a simple true/false reply.  This comes with some drawbacks, it cannot be installed without configuration and improper setup can reduce the amount of security it confers.  The configuration requirment allows for the creation of higher and lower security zones on a site, for sites to preform continuous authentication, and for more sensitive sites to require more trust.  </p>
+				<p>My system is designed to preform authentication at any time and returns a trust score rather than a simple true/false reply.  This comes with some drawbacks, it cannot be installed without configuration and improper setup can reduce the amount of security it confers.  This design does allow for the creation of higher and lower security zones on a site, for sites to preform continuous authentication, and for more sensitive sites to require more trust.  </p>
 				<p>The authentication is preformed using data collected from the user's browser with JavaScript.  The scripts update the data collected about the user on each page load in order to help identify session hijacking.  </p>
 				<p>The software consists of two parts a set of modules and server component.  </p>
 				<div id="server">
@@ -78,16 +85,24 @@
 				</div>
 				<section id="modules">
 					<h3>Modules</h3>
-					<p>The modules specify the scripts that are sent to web browsers and used to collect data as well as the methods used to process the returned data.  Each module contains several parts: a JavaScript script that is sent to the web browser to collect data, two Python function for hashing the data before it is stored, and a function that compares the collected data against the stored data to assess how much to trust the user.  </p>
+					<p>The modules are responsible for preforming the different kinds of authentication.  Each module contains several parts: a JavaScript script that is sent to the web browser to collect data, two Python function for hashing the data before it is stored, and a function that compares the collected data against the stored data to assess how much to trust the user.  </p>
 					<p>For a guide on module development please see the <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Writing-Modules">wiki page</a>. </p>
 				</section>
 			</article>
 			<article id="methedology">
-				<h2>Methods</h2>
+				<h2>Methods of Verification</h2>
 				<section id="key_dyn">
 					<h3>Keystroke Dynamics</h3>
 					<p>The keystroke dynamics module collects data about how a user types and uses it to identify them.  Because people have different typing patterns the software can identify when another person, potentially an attacker, is typing.  </p>
 					<p>The current keystroke dynamics system collects the average amount of time needed to change between different keys.  During processing these collected averages are then compared to previous averages and scored. Currently the comparison is done by finding all the overlapping keys and finding the difference between the averages.  The the differences between the times in the stored set and the collected data are then averaged and used to decide the final score of the user.  If the average deviation between the collected times and the new ones is too high the person typing is probably no who they say they are.  </p>
+				</section>
+				<section id="fingerprinting">
+					<h3>Browser Fingerprinting</h3>
+					<p>The fingerprinting module preforms very basic browser fingerprinting.  It collects the screen resolution of users' computers and the number of processor cores they have.  </p>
+				</section>
+				<section id="IP">
+					<h3>IP Address Checking</h3>
+					<p>This is a very simple module to check the IP address of the users.  </p>
 				</section>
 			</article>
 			<article id="results">
