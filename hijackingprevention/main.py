@@ -1,7 +1,3 @@
-#! venv/bin/python
-# This script is the main script
-# It responds to HTTP requests
-
 import tornado.web
 import motor.motor_tornado
 import json
