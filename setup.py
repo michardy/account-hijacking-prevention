@@ -2,8 +2,16 @@ from pymongo import MongoClient
 import hijackingprevention.rec as rec
 import config
 import bcrypt
-import secrets
-
+try:
+	import secrets
+except ImportError:
+	import os
+	import base64
+	class secrets:
+		'''Python 3.6 secrets polyfill'''
+		def token_urlsafe(bytes):
+			'''emulates token_urlsafe'''
+			return(base64.b64encode(os.urandom(bytes)))
 
 client = MongoClient()
 db = client.hijackingPrevention
