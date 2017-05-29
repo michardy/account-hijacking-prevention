@@ -1,9 +1,9 @@
 # The primary purpose of this module is to run data hashing and comparison functions
 # It is also called during the intialization of modules to register their hashing and comparison functions.
+# Try to leave all the boilerplate calls like DB access and JSON decoding in the main.py file
 
-import user
-import session
-import api_user
+import hijackingprevention.session as session
+import hijackingprevention.api_user as api_user
 
 from tornado import gen
 
@@ -50,7 +50,8 @@ class Receiver():
 	@gen.coroutine
 	def add_data(self, req, headers, db):
 		"""This function is called when data is received from a browser to hash and store the data"""
-		if req['name'] in self.__comparers.keys():
+		# This function has, rather irritatingly, remained in spite of my attempt to keep database access out of the api.py file.  
+		if req['name'] in self.__hashers.keys():
 			#setup to invoke hasher
 			site = api_user.Site(db)
 			yield site.get_by_client_key(req['ck'],
@@ -58,10 +59,10 @@ class Receiver():
 			salt = site.get_salt(req['name'])
 			#invoke hasher
 			hash = yield self.__hashers[req['name']](req['data'],
-				req['ck'], headers, salt)
+				headers, salt)
 			#store the result
 			site_id = site.get_id()
-			ses = session.Session(req['sessionID'], site_id, db) #setup session object
+			ses = session.Session(req['sid'], site_id, db) #setup session object
 			yield ses.read_db() #read session if it exists
 			ses.add_data({req['name']:hash}) #add data to session object
 			yield ses.write_out() #update session object in database
@@ -71,41 +72,40 @@ class Receiver():
 			return(400, 'Err: Could not find a handler for "' + req['name'] + '"')
 
 	@gen.coroutine
-	def copy_data(self, ses, uid, site_id, db):
+	def copy_data(self, ses, member):
 		"""This function is called to store session data permenantly to the user profile"""
 		data = {}
 		for dt in ses.keys():
-			data[dt] = self.__translators[dt](ses[dt])
-		member = user.User(uid, site_id, db)
-		yield member.read_db()
+			data[dt] = yield self.__translators[dt](ses[dt])
 		member.add_data(data)
-		yield member.write_out()
 		return(OK)
 
 	@gen.coroutine
-	def __calculate_sub_rating(self, data_type, sdat, mdat):
+	def __calculate_sub_rating(self, data_type, session_dat, user_dat):
 		"""Calculate trust score for specific subtype of user data"""
 		sub_tot = 0
-		if data_type in mdat and data_type in sdat: #loop through all the types of data
-			for h in mdat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
-				sub_tot += (yield self.__comparers[data_type](
-					sdat[data_type], h))
-		elif data_type not in sdat: #the user's session data may have expired or have not been collected
+		if data_type in user_dat and data_type in session_dat:
+			for h in user_dat[data_type]: #loop through all the user's hashed data of this type and compare it to the session
+				temp = (yield self.__comparers[data_type](
+					session_dat[data_type], h))
+				if temp > sub_tot: #fix security issue created by the previous ability to combine multiple low scores
+					sub_tot = temp
+		elif data_type not in session_dat and data_type in user_dat: #the user's session data may have expired or have not been collected
 			sub_tot = -1*self.__maxscores[data_type] #score nonexistant data negativly
 		return(sub_tot)
 
 	@gen.coroutine
-	def get_trust(self, sdat, mdat, site, db):
+	def get_trust(self, session_dat, user_dat):
 		"""This scores how trustworthy a user is as a number between -1 and 1.
 		The score is based on how much session data matches the data stored in their user profile.
 		A score of 1 means that the user is perfectly trustworthy, a score of 0 means they cannot be trusted.
-		A negative score means that the users data has expired and an accurate determination cannot be made.
+		A negative score means that the session data has expired and an accurate determination cannot be made.
 		"""
 		total = 0 #total user score
 		actmax = 0 #maximum achievable total (A user with this score is PERFECT)
-		for dt in self.__comparers.keys():
+		for dt in self.__comparers.keys(): #loop through all the types of data
 			actmax += self.__maxscores[dt] #add data type's max score to the maximum
-			total += yield self.__calculate_sub_rating(dt, sdat, mdat) #calculate sub score for given data type and add it to total
+			total += yield self.__calculate_sub_rating(dt, session_dat, user_dat) #calculate sub score for given data type and add it to total
 		try:
 			return(200, str(total/actmax))
 		except ZeroDivisionError:

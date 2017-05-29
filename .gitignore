@@ -1,3 +1,11 @@
 /venv/**
 __pycache__/**
 modules/__pycache__/**
+hijackingprevention/__pycache__/**
+
+.cache/**
+tests/__pycache__/**
+tests/.cache/**
+.coverage
+
+tests/res.json
