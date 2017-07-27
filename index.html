@@ -33,6 +33,8 @@
 		<!--Question: Where is the URL property?  Open Graph Protocol has it.  
 		Answer: How are you looking at this page without the URL?
 		-->
+		<!--Markdown converter for vulnerabiltiy bulletin-->
+		<script src="https://cdn.rawgit.com/showdownjs/showdown/1.7.1/dist/showdown.min.js"></script>
 	</head>
 	<body>
 		<header>
@@ -63,6 +65,7 @@
 				<li><a href="#results">Results</a></li>
 				<li><a href="#install">Instalation</a></li>
 				<li><a href="#contrib">Contributing</a></li>
+				<li><a href="#sec">Security Bulletin</a></li>
 			</ol>
 		</nav>
 		<main>
@@ -118,6 +121,11 @@
 			<article id="contrib">
 				<h2>Contributing</h2>
 				<p>If you wish to help with this project you can suggest improvements to the <a href="https://github.com/michardy/account-hijacking-prevention/wiki">documentation</a> or submit a pull request.  A set of possible improvements for this project are available <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Improvements">here</a> and in the <a href="https://github.com/michardy/account-hijacking-prevention/issues">issue tracker</a>.</p>
+			</article>
+			<article id="sec">
+				<h2>Security Bulletin</h2>
+				<table id="board"></table>
+				<script src="/security-bulletin.js"></script>
 			</article>
 		</main>
 		<footer>
