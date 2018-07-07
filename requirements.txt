@@ -3,6 +3,6 @@ coverage==4.5.1
 cryptography==2.2.2
 motor==1.2.2
 pymongo==3.7.0
-pytest==3.6.2
+pytest==3.6.3
 pytest-cov==2.5.1
 tornado==5.0.2
