@@ -4,7 +4,11 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta id="meta" name="viewport" content="width=device-width; initial-scale=1.0" />
-		<link rel="stylesheet" href="main.css"/>
+		<link rel="stylesheet" href="branding.css">
+		<link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/michardy/grid-ui@6.2/css/grid_window.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/michardy/grid-ui@6.2/css/basic.min.css">
+		<!--<link rel="stylesheet" href="main.css"/>-->
 		<!--Please wait while I sacrafice a newborn goat to IE/Edge. (Edit: It still does not work)-->
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 		<!--All hail Facebook glory be their name.-->
@@ -35,50 +39,50 @@
 		Answer: How are you looking at this page without the URL?
 		-->
 		<!--Markdown converter for vulnerabiltiy bulletin-->
-		<script src="https://cdn.rawgit.com/showdownjs/showdown/1.7.1/dist/showdown.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/showdownjs/showdown@1.7.1/dist/showdown.min.js"></script>
 	</head>
-	<body>
+	<body class="article-page">
 		<header>
 			<h1><a href="/account-hijacking-prevention">Account Hijacking Prevention</a></h1>
 			<a class="navbar" href="https://github.com/michardy/account-hijacking-prevention">Repository</a>&nbsp;
 			<a class="navbar" href="https://github.com/michardy/account-hijacking-prevention/issues">Issues</a>&nbsp;
 			<a class="navbar" href="https://michardy.github.io/account-hijacking-prevention/LICENSE.txt">License</a>&nbsp;
 		</header>
-		<nav>
+		<nav class="sidebar">
 			Contents:
 			<ol>
-				<li><a href="#about">About</a></li>
+				<li><a href="#about.hijacking-prevention">About</a></li>
 				<li>
-					<a href="#design">Design</a>
+					<a href="#design.hijacking-prevention">Design</a>
 					<ol>
 						<li><a href="#server">Server</a></li>
 						<li><a href="#modules">Modules</a></li>
 					</ol>
 				</li>
 				<li>
-					<a href="#methedology">Methods of Verification</a>
+					<a href="#methodology.hijacking-prevention">Methods of Verification</a>
 					<ol>
 						<li><a href="#key_dyn">Keystroke Dynamics</a></li>
 						<li><a href="#fingerprinting">Browser Fingerprinting</a></li>
 						<li><a href="#IP">IP Address Checking</a></li>
 					</ol>
 				</li>
-				<li><a href="#results">Results</a></li>
-				<li><a href="#install">Instalation</a></li>
-				<li><a href="#contrib">Contributing</a></li>
-				<li><a href="#sec">Security Bulletin</a></li>
+				<li><a href="#results.hijacking-prevention">Results</a></li>
+				<li><a href="#install.hijacking-prevention">Installation</a></li>
+				<li><a href="#contrib.hijacking-prevention">Contributing</a></li>
+				<li><a href="#sec.hijacking-prevention">Security Bulletin</a></li>
 			</ol>
 		</nav>
 		<main>
-			<article id="intro">
+			<article id="intro.hijacking-prevention" class="cartographer-lot">
 				<p>The purpose of this project is to provide website administrators with an open source piece of software to detect and prevent account hijacking.  </p>
 				<p>Please note: <b>This project is currently not quite ready for use on a production website.  </b>The system for adding new devices is not complete so users will have difficulty using it from multiple devices.  </p>
 			</article>
-			<article id="about">
+			<article id="about.hijacking-prevention">
 				<h2>About</h2><!--Probably misplaced-->
 				<p>When I originally came up with this project I wanted to use a system of modules to score the user's legitimacy with a series of tests. After writing the overarching system used by the modules I switched to focusing on one specific module, the keystroke dynamics module. While my work has largely focused on using keystroke dynamics, the use of modules leaves room for the inclusion of other forms of authentication.</p>
 			</article>
-			<article id="design">
+			<article id="design.hijacking-prevention" class="cartographer-lot">
 				<h2>Design</h2>
 				<p>My system is designed to preform authentication at any time and returns a trust score rather than a simple true/false reply.  This comes with some drawbacks, it cannot be installed without configuration and improper setup can reduce the amount of security it confers.  This design does allow for the creation of higher and lower security zones on a site, for sites to preform continuous authentication, and for more sensitive sites to require more trust.  </p>
 				<p>The authentication is preformed using data collected from the user's browser with JavaScript.  The scripts update the data collected about the user on each page load in order to help identify session hijacking.  </p>
@@ -94,7 +98,7 @@
 					<p>For a guide on module development please see the <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Writing-Modules">wiki page</a>. </p>
 				</section>
 			</article>
-			<article id="methedology">
+			<article id="methodology.hijacking-prevention" class="cartographer-lot">
 				<h2>Methods of Verification</h2>
 				<section id="key_dyn">
 					<h3>Keystroke Dynamics</h3>
@@ -110,16 +114,16 @@
 					<p>This is a very simple module to check the IP address of the users.  </p>
 				</section>
 			</article>
-			<article id="results">
+			<article id="results.hijacking-prevention" class="cartographer-lot">
 				<h2>Results</h2>
 				<p>I started out the keystroke dynamics module with the hope that I could achieve a 60 percent reliability. Fortunately, I have been able to exceed this initial expectation and achieve a greater than 80 percent reliability. This still leaves considerable room for improvement.</p>
 				<p>In the course of writing this software I have realized that other methods may be needed to identify the individual typing in our increasingly phone based world.  Phones have few identifiable traits compared to PCs and strive to eliminate typing making it hard to accurately confirm the identity of a user on a mobile phone.  </p>
 			</article>
-			<article id="install">
+			<article id="install.hijacking-prevention" class="cartographer-lot">
 				<h2>Installing</h2>
 				<p>Check out the <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Installation-Instructions">installation guide</a> on the project wiki.  </p>
 			</article>
-			<article id="contrib">
+			<article id="contrib.hijacking-prevention" class="cartographer-lot">
 				<h2>Contributing</h2>
 				<p>If you wish to help with this project you can suggest improvements project or to the <a href="https://github.com/michardy/account-hijacking-prevention/wiki">documentation</a>.</p>
 				<p>Pull requests to improve this project and its documentation are also welcome.  A set of possible improvements for this project are available <a href="https://github.com/michardy/account-hijacking-prevention/wiki/Improvements">here</a> and in the <a href="https://github.com/michardy/account-hijacking-prevention/issues">issue tracker</a>.</p>
@@ -140,7 +144,7 @@
 					<p>This allows me to display the solution to the problem to everyone using the <a href="#sec">security bullitin</a>.  </p>
 				</section>
 			</article>
-			<article id="sec">
+			<article id="sec.hijacking-prevention" class="cartographer-lot">
 				<h2>Security Bulletin</h2>
 				<table id="board"></table>
 				<script src="security-bulletin.js"></script>
@@ -152,4 +156,6 @@
 			</div>
 		</footer>
 	</body>
+	<script src="//cdn.jsdelivr.net/gh/michardy/grid-ui@5/js/grid_window.js"></script>
+	<script src="//cartographer.michaelbh.com/js/cb.js"></script>
 </html>

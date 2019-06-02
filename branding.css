@@ -1,0 +1,76 @@
+/* Copyright (c) 2018 Michael Hardy */
+
+:root {
+	/* Define the colors used */
+	--dark: #000000;
+	--light: #ffffff;
+	--emphasis: #da4167;
+	--mid-dark: #000055;
+	--mid-light: #0000ee;
+
+
+	/* define usages of colors */
+	--background: var(--light);
+	--text: var(--dark);
+	--header: var(--light);
+	--title: var(--mid-light);
+	--header-text: var(--mid-dark);
+	--footer-text: var(--mid-dark);
+	--subtle-card: var(--mid-dark);
+	--subtle-card-text: var(--light);
+	--blatant-card: var(--mid-light);
+	--blatant-card-text: var(--light);
+	--pane: var(--mid-light);
+	--pane-border: var(--dark);
+	--pane-text: var(--light);
+	--tab-deselected: var(--mid-dark);
+	--tab-deselected-text: var(--light);
+	--table: var(--light);
+	--table-border: var(--dark);
+	--link: var(--mid-light);
+	--link-visited: var(--mid-dark);
+	--tag: var(--emphasis);
+	--tag-border: var(--mid-light);
+	--tag-text: var(--light);
+	--button: var(--mid-light);
+	--button-text: var(--light);
+	--button-major: var(--emphasis);
+	--button-major-text: var(--dark);
+	--button-minor: var(--mid-dark);
+	--button-minor-text: var(--light);
+	--embed: var(--light);
+	--embed-text: var(--dark);
+}
+
+@font-face{
+	font-family: 'nimbusmono';
+	src: url('/font/nimbusmono-regular-webfont.woff');
+}
+
+@font-face{
+	font-family: 'opensans';
+	src: url('/font/OpenSans-Regular-webfont.woff');
+}
+
+header h1 {
+	font-family: 'nimbusmono', monospace;
+}
+
+@media (max-aspect-ratio: 4/3) {
+	header h1 {
+		text-align: center;
+	}
+}
+
+.split-card h2 {
+	margin-top: 2em;
+}
+
+pre {
+	background-color: #eee;
+}
+
+.outer {
+	border: 2px solid black;
+}
+
