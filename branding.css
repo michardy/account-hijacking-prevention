@@ -47,30 +47,6 @@
 	src: url('/font/nimbusmono-regular-webfont.woff');
 }
 
-@font-face{
-	font-family: 'opensans';
-	src: url('/font/OpenSans-Regular-webfont.woff');
-}
-
 header h1 {
 	font-family: 'nimbusmono', monospace;
 }
-
-@media (max-aspect-ratio: 4/3) {
-	header h1 {
-		text-align: center;
-	}
-}
-
-.split-card h2 {
-	margin-top: 2em;
-}
-
-pre {
-	background-color: #eee;
-}
-
-.outer {
-	border: 2px solid black;
-}
-
