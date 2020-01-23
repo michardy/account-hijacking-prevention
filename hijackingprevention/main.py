@@ -111,7 +111,7 @@ class Collect(tornado.web.RequestHandler):
 		self.set_header("Content-Type", 'application/javascript; charset="utf-8"')
 		self.render('collect.js', collectors=rec.mods.fxns,
 			col_list = json.dumps(rec.mods.fxn_names),
-			async_list = json.dumps(rec.mods.async))
+			callback_list = json.dumps(rec.mods.callbacks))
 
 class TestPage(tornado.web.RequestHandler):
 	"""Renders Welcome Page"""
