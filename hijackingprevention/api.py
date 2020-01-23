@@ -26,7 +26,7 @@ class Receiver():
 		self.__translators = {}
 		self.__comparers = {}
 		self.__maxscores = {}
-		self.__async = {}
+		self.__callbacks = {}
 
 	# Module registration functions
 
