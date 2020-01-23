@@ -4,9 +4,9 @@ class Client():
 	def __init__(self):
 		self.fxns = []
 		self.fxn_names = []
-		self.async = []
-	def add(self, fxn_name, script, is_async):
+		self.callbacks = []
+	def add(self, fxn_name, script, is_callback):
 		"""Called to add a script to be sent with collect.js"""
 		self.fxns.append(script)
 		self.fxn_names.append(fxn_name)
-		self.async.append(is_async)
+		self.callbacks.append(is_callback)
