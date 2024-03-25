@@ -4,5 +4,5 @@ cryptography==2.8
 motor==2.1.0
 pymongo==3.10.1
 pytest==5.3.5
-pytest-cov==2.8.1
+pytest-cov==5.0.0
 tornado==6.0.3
